@@ -1,2 +1,1 @@
-# Template
-
+# Softwaretechnik I
