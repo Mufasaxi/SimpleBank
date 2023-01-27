@@ -1,55 +1,62 @@
 package g2.bankkontoverwaltung.model;
 
+import org.apache.commons.lang.IllegalClassException;
+
+import java.rmi.NoSuchObjectException;
 import java.util.HashMap;
 import java.util.Vector;
 
-public class Kunde {
-    private String name;
-    private String adresse;
-    private String telefonnummer;
+public class Kunde implements KundeIF {
 //    personalausweis HashMap Beispiel:
-//    key = "Passport", value="C123145"
+//    key = "Name", value="Daryl"
 //    key = "Aufenthaltstitel", value="DE12345"
-    private HashMap<String, String> personalausweis;
+    private HashMap<String, String> personaldaten;
     private Vector<Konto> konten;
 
-    public Kunde(String name, String adresse, String telefonnummer) {
-        this.name = name;
-        this.adresse = adresse;
-        this.telefonnummer = telefonnummer;
-        this.personalausweis = new HashMap<>();
+    public Kunde(HashMap<String, String> personaldaten) {
+        this.personaldaten = personaldaten;
         this.konten = new Vector<>();
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public String getPersonalData(String key) {
+        return this.personaldaten.get(key);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public void setPersonalData(String key, String value) {
+        this.personaldaten.put(key, value);
     }
 
-    public String getAdresse() {
-        return adresse;
+    @Override
+    public void removePersonalData(String key) {
+        this.personaldaten.remove(key);
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    @Override
+    public void createGirokonto(double anfangssaldo) {
+        Girokonto newKonto = new Girokonto(this, anfangssaldo);
+        this.konten.add(newKonto);
     }
 
-    public String getTelefonnummer() {
-        return telefonnummer;
+    @Override
+    public void createDepotkonto(int referenzkontoId) throws IllegalClassException, ArrayIndexOutOfBoundsException {
+        Depotkonto newKonto = new Depotkonto(this);
+        newKonto.addReferenzkonto(referenzkontoId);
     }
 
-    public void setTelefonnummer(String telefonnummer) {
-        this.telefonnummer = telefonnummer;
+    @Override
+    public Vector<Konto> getKonto() {
+        return this.konten;
     }
 
-    public void addPersonalausweis(String ausweis, String ausweisnummer) {
-        this.personalausweis.put(ausweis, ausweisnummer);
+    @Override
+    public Konto getKonto(int id) throws ArrayIndexOutOfBoundsException {
+        return this.konten.get(id);
     }
 
-    public void addKonto(Konto konto) {
-        this.konten.add(konto);
+    @Override
+    public void removeKonto(int id) {
+
     }
 }

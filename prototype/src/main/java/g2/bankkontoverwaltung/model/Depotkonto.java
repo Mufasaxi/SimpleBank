@@ -1,31 +1,40 @@
 package g2.bankkontoverwaltung.model;
 
+import org.apache.commons.lang.IllegalClassException;
+
+import java.rmi.NoSuchObjectException;
 import java.util.Vector;
 
-public class Depotkonto extends Konto implements DepotkontoIF{
-    private Girokonto referenzkonto;
-    // wie werden wir die ids erstellen?
-    private int id;
+public class Depotkonto extends Konto{
+    private Vector<Konto> referenzkonten;
     private Vector<Aktie> aktien;
 
-    public Depotkonto(Kunde kontoinhaber, Girokonto referenzkonto) {
+    public Depotkonto(Kunde kontoinhaber) {
         super(kontoinhaber, 0);
 
-        this.referenzkonto = referenzkonto;
+        this.referenzkonten = new Vector<>();
+        this.aktien = new Vector<>();
     }
 
-    @Override
-    public Girokonto getReferenzkonto() {
-        return this.referenzkonto;
+    public Vector<Konto> getReferenzkonten() {
+        return this.referenzkonten;
     }
 
-    @Override
-    public int getId() {
-        return this.id;
+    public void addReferenzkonto(int id) throws IllegalClassException, ArrayIndexOutOfBoundsException {
+        Konto referenzkonto = this.getKontoinhaber().getKonto(id);
+        if (referenzkonto instanceof Girokonto) {
+            this.referenzkonten.add(referenzkonto);
+        } else {
+            throw new IllegalClassException(Girokonto.class, referenzkonto);
+        }
     }
 
-    @Override
     public Vector<Aktie> getAktien() {
         return this.aktien;
+    }
+
+    @Override
+    public void giveState() {
+
     }
 }

@@ -8,4 +8,20 @@ public class Aktie {
         this.kennnummer = kennnummer;
         this.tageskurs = tageskurs;
     }
+
+    public double getTageskurs() {
+        return tageskurs;
+    }
+
+    public void setTageskurs(double tageskurs) {
+        this.tageskurs = tageskurs;
+    }
+
+    public int getKennnummer() {
+        return kennnummer;
+    }
+
+    public void setKennnummer(int kennnummer) {
+        this.kennnummer = kennnummer;
+    }
 }
