@@ -13,8 +13,4 @@ public class Girokonto extends Konto {
         return this.iban;
     }
 
-    @Override
-    public void giveState() {
-
-    }
 }

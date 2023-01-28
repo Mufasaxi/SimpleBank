@@ -32,9 +32,4 @@ public class Depotkonto extends Konto{
     public Vector<Aktie> getAktien() {
         return this.aktien;
     }
-
-    @Override
-    public void giveState() {
-
-    }
 }

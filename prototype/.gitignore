@@ -75,3 +75,7 @@ $RECYCLE.BIN/
 ## JetBrains and VSCode
 .idea
 .vscode
+
+.classpath
+.project
+.settings/

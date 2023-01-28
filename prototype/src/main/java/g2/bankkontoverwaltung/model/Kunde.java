@@ -1,17 +1,19 @@
 package g2.bankkontoverwaltung.model;
 
+import g2.bankkontoverwaltung.ObserverIF;
 import org.apache.commons.lang.IllegalClassException;
 
 import java.rmi.NoSuchObjectException;
 import java.util.HashMap;
 import java.util.Vector;
 
-public class Kunde implements KundeIF {
+public class Kunde implements KundeIF, ObservableIF {
 //    personalausweis HashMap Beispiel:
 //    key = "Name", value="Daryl"
 //    key = "Aufenthaltstitel", value="DE12345"
     private HashMap<String, String> personaldaten;
     private Vector<Konto> konten;
+    private Vector<ObserverIF> observers;
 
     public Kunde(HashMap<String, String> personaldaten) {
         this.personaldaten = personaldaten;
@@ -57,6 +59,20 @@ public class Kunde implements KundeIF {
 
     @Override
     public void removeKonto(int id) {
+        this.konten.remove(id);
+    }
 
+    @Override
+    public void addObserver(ObserverIF observer) {
+    	this.observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(ObserverIF observer) {
+    	this.observers.remove(observer);
+    }
+    
+    private void updateObservers() {
+    	this.observers.forEach(observer -> observer.update());
     }
 }
