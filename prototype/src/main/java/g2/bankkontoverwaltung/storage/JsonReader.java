@@ -1,5 +1,7 @@
 package g2.bankkontoverwaltung.storage;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import g2.bankkontoverwaltung.model.Kunde;
 
@@ -13,10 +15,15 @@ import java.util.Scanner;
 
 
 public class JsonReader implements SaveDataIF, LoginIF{
-    ObjectMapper mapper = new ObjectMapper();
-    String absPath = new File("").getAbsolutePath();
+    ObjectMapper mapper;
+    
+    
+    public JsonReader() {
+		this.mapper = new ObjectMapper();
+		mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+	}
 
-    @Override
+	@Override
     public Kunde getKunde(String benutzername) throws IOException {
     	Path path = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/" + benutzername + ".json");
     	
@@ -26,7 +33,7 @@ public class JsonReader implements SaveDataIF, LoginIF{
 
     @Override
     public void saveKunde(Kunde kunde) throws IOException {
-    	Path path = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/" + kunde.getPersonalData("benutzername") + ".json");
+    	Path path = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/" + kunde.getPersonaldaten().get("benutzername") + ".json");
     	Files.deleteIfExists(path);
     	Files.createFile(path);
         mapper.writeValue(new File(path.toString()), kunde);

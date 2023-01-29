@@ -15,7 +15,8 @@ import g2.bankkontoverwaltung.model.Kunde;
 
 public class StorageTest {
 	private static JsonReader testObject;
-	private static Kunde example;
+	private Kunde example;
+	
 	@Before
 	public void setUpBefore() throws Exception {
 		testObject = new JsonReader();
@@ -40,7 +41,7 @@ public class StorageTest {
 	@Test
 	public void testLoadKunde() throws IOException {
 		Kunde loaded = testObject.getKunde("example1");
-		
-		assert loaded.getPersonalData("name") == example.getPersonalData("name");
+
+		assert loaded.getPersonaldaten().equals(example.getPersonaldaten());
 	}
 }

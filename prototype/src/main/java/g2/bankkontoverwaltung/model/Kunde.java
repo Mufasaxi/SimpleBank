@@ -15,14 +15,19 @@ public class Kunde implements KundeIF, ObservableIF {
     private Vector<Konto> konten;
     private Vector<ObserverIF> observers;
 
+    public Kunde() {
+    	super();
+    }
+    
     public Kunde(HashMap<String, String> personaldaten) {
         this.personaldaten = personaldaten;
         this.konten = new Vector<>();
+        this.observers = new Vector<>();
     }
 
-    @Override
-    public String getPersonalData(String key) {
-        return this.personaldaten.get(key);
+	@Override
+    public HashMap<String, String> getPersonaldaten() {
+        return this.personaldaten;
     }
 
     @Override

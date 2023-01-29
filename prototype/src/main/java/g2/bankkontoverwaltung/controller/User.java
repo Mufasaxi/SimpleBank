@@ -60,7 +60,7 @@ public class User implements ActionListener, ObserverIF {
     }
 
     public String getPersonalData(String key) {
-        return this.identity.getPersonalData(key);
+        return this.identity.getPersonaldaten().get(key);
     }
 
     public void setPersonalData(String key, String value) {
