@@ -10,14 +10,14 @@ public class CreateDepotPage implements ActionListener {
 	JFrame  frame = new JFrame();
 	JLabel depotLabel = new JLabel("DEPOTKONTO");
 	JLabel fillLabel = new JLabel("F�llen Sie die folgenden Felder aus");
-	JTextField startSaldoField = new JTextField();
-	JLabel saldoLabel = new JLabel("Start Saldo:");
-	JLabel saldoWarningLabel = new JLabel("Bitte nur Zahlen eingeben!");
+	JTextField referenceIDField = new JTextField();
+	JLabel referenceIDLabel = new JLabel("Refernzkonto ID:");
+	JLabel idWarningLabel = new JLabel("Bitte nur Zahlen eingeben!");
 	JButton createButton = new JButton("Konto erstellen");
 
 	User user;
 	String username;
-	Float saldo;
+	Integer id;
 	
 	public CreateDepotPage(User user, String username) {
 		this.user = user;
@@ -28,19 +28,19 @@ public class CreateDepotPage implements ActionListener {
 		
 		fillLabel.setBounds(0,25,400,100);
 		
-		saldoLabel.setBounds(50,100,75,25);
-		startSaldoField.setBounds(125,100,200,25);
-		saldoWarningLabel.setBounds(150,150,200,25);
-		saldoWarningLabel.setVisible(false);
+		referenceIDLabel.setBounds(50,100,75,25);
+		referenceIDField.setBounds(125,100,200,25);
+		idWarningLabel.setBounds(150,150,200,25);
+		idWarningLabel.setVisible(false);
 		
 		createButton.setBounds(175,125,150,25);
 		createButton.setFocusable(false);
 		createButton.addActionListener(this);
 		
-		frame.add(saldoWarningLabel);
+		frame.add(idWarningLabel);
 		frame.add(createButton);
-		frame.add(saldoLabel);
-		frame.add(startSaldoField);
+		frame.add(referenceIDLabel);
+		frame.add(referenceIDField);
 		frame.add(fillLabel);
 		frame.add(depotLabel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,19 +53,19 @@ public class CreateDepotPage implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==createButton) {
 			System.out.println("create clicked");
-			System.out.println(startSaldoField.getText());
+			System.out.println(referenceIDField.getText());
 			System.out.println(username);
 			
 			// if data entered is float
 			try {
-				saldoWarningLabel.setVisible(false);
-				this.saldo = Float.parseFloat(startSaldoField.getText());
+				idWarningLabel.setVisible(false);
+				this.id = Integer.parseInt(referenceIDField.getText());
 				frame.dispose();
-				DepotOverviewPage overViewPage = new DepotOverviewPage(user, username, saldo);
+				DepotOverviewPage overViewPage = new DepotOverviewPage(user, username, id);
 			// if data entered is not float
 			}catch(NumberFormatException nfe){
-				startSaldoField.setText("");
-				saldoWarningLabel.setVisible(true);
+				referenceIDField.setText("");
+				idWarningLabel.setVisible(true);
 			}
 			
 		}

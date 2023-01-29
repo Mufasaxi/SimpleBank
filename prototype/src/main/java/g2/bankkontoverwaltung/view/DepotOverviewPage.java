@@ -11,23 +11,23 @@ public class DepotOverviewPage implements ActionListener{
 	JFrame  frame = new JFrame();
 	JLabel overviewLabel = new JLabel("�BERSICHT");
 	JLabel userLabel = new JLabel();
-	JLabel saldoLabel = new JLabel();
+	JLabel referenceIDLabel = new JLabel();
 	JButton functionsButton = new JButton("Funktionen");
 
 	User user;
 	String username;
-	Float saldo;
+	Integer id;
 	
-	DepotOverviewPage(User user, String username, Float saldo){
+	DepotOverviewPage(User user, String username, Integer id){
 		this.user = user;
 		this.username = username;
-		this.saldo = saldo;
+		this.id = id;
 		
 		userLabel.setText("username: "+ user );
 		userLabel.setBounds(0,25,100,100);
 		
-		saldoLabel.setText("saldo: "+ saldo);
-		saldoLabel.setBounds(0,50,100,100);
+		referenceIDLabel.setText("reference ID: "+ id);
+		referenceIDLabel.setBounds(0,50,100,100);
 		
 		overviewLabel.setBounds(0,0,400,35);
 		overviewLabel.setFont(new Font("Serif", Font.PLAIN, 25));
@@ -37,7 +37,7 @@ public class DepotOverviewPage implements ActionListener{
 		functionsButton.addActionListener(this);
 		
 		frame.add(functionsButton);
-		frame.add(saldoLabel);
+		frame.add(referenceIDLabel);
 		frame.add(userLabel);
 		frame.add(overviewLabel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
