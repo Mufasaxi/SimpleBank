@@ -1,5 +1,6 @@
 package g2.bankkontoverwaltung.model;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import org.junit.Before;
@@ -25,17 +26,16 @@ public class KundeTest {
 	}
 	
 	@Test
-	public void testKonten() {
+	public void testKonten() throws IOException {
 		testObject.createGirokonto(100);
 		
 		assert testObject.getKonto(0) instanceof Girokonto;
 		assert testObject.getKonto(0).getSaldo() == 100;
 		
-		assert testObject.getKonto(0).getKontoinhaber() == testObject.getPersonaldaten().get("username");
+		assert testObject.getKonto(0).getBenutzername() == testObject.getPersonaldaten().get("username");
 		
 		testObject.createDepotkonto(0);
-		
-		System.out.println(testObject.getKonto().toString());
+
 		assert testObject.getKonto(1) instanceof Depotkonto;
 	}
 }

@@ -132,7 +132,7 @@ public class UserConsole implements ActionListener, ObserverIF {
 		return true;
 	}
 
-	public void createDepotkonto(int referenzkontoId) throws IllegalAccessException {
+	public void createDepotkonto(int referenzkontoId) throws IllegalAccessException, IOException {
 		if (this.identity == null) {
 			throw new IllegalAccessException("Not logged in");
 		}

@@ -52,7 +52,7 @@ public class StorageTest {
 	
 	@Test
 	public void testLogin() throws IOException {
-		testObject.saveLogin("example1", "exAmple1");
+		testObject.saveLogin("example1", "password");
     	Path path = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/example1.login");
     	File file = new File(path.toString());
     	

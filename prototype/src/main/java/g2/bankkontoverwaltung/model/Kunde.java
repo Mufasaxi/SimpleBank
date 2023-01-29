@@ -1,8 +1,11 @@
 package g2.bankkontoverwaltung.model;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Vector;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import g2.bankkontoverwaltung.storage.JsonReader;
 import org.apache.commons.lang.IllegalClassException;
 
 import g2.bankkontoverwaltung.ObserverIF;
@@ -31,6 +34,7 @@ public class Kunde implements KundeIF, ObservableIF {
     }
 
     @Override
+    @JsonIgnore
     public void setPersonalData(String key, String value) {
         this.personaldaten.put(key, value);
     }
@@ -41,26 +45,29 @@ public class Kunde implements KundeIF, ObservableIF {
     }
 
     @Override
-    public Girokonto createGirokonto(double anfangssaldo) {
+    public Girokonto createGirokonto(double anfangssaldo) throws IOException {
         Girokonto newKonto = new Girokonto(this, anfangssaldo);
         this.konten.add(newKonto);
+        (new JsonReader()).saveKunde(this);
         return newKonto;
     }
 
     @Override
-    public Depotkonto createDepotkonto(int referenzkontoId) throws IllegalClassException, ArrayIndexOutOfBoundsException {
+    public Depotkonto createDepotkonto(int referenzkontoId) throws IllegalClassException, ArrayIndexOutOfBoundsException, IOException {
         Depotkonto newKonto = new Depotkonto(this);
-        newKonto.addReferenzkonto(this.getKonto(referenzkontoId));
+        newKonto.addReferenzkonto(referenzkontoId);
         this.konten.add(newKonto);
+        (new JsonReader()).saveKunde(this);
         return newKonto;
     }
 
     @Override
-    public Vector<Konto> getKonto() {
+    public Vector<Konto> getKonten() {
         return this.konten;
     }
 
     @Override
+    @JsonIgnore
     public Konto getKonto(int id) throws ArrayIndexOutOfBoundsException {
         return this.konten.get(id);
     }

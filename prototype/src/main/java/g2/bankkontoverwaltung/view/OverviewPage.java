@@ -1,21 +1,31 @@
 package g2.bankkontoverwaltung.view;
 
+import g2.bankkontoverwaltung.controller.User;
+import g2.bankkontoverwaltung.model.Girokonto;
+import g2.bankkontoverwaltung.model.Konto;
+
 import javax.swing.*;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class OverviewPage implements ActionListener{
 	
-	JFrame frame = new JFrame();
-	JLabel overviewLabel = new JLabel("ACCOUNT OVERVIEW");
-	JLabel chooseLabel = new JLabel("Which type of accounts do you want to see?");
-	JRadioButton giroButton = new JRadioButton("Giro");
-	JRadioButton depotButton = new JRadioButton("Depot");
-	JButton functionsButton = new JButton("Functions");
-	
-	public OverviewPage(){
+	public JFrame frame = new JFrame();
+	public JLabel overviewLabel = new JLabel("ACCOUNT OVERVIEW");
+	public JLabel chooseLabel = new JLabel("Which type of accounts do you want to see?");
+	public JRadioButton giroButton = new JRadioButton("Giro");
+	public JRadioButton depotButton = new JRadioButton("Depot");
+	public JButton functionsButton = new JButton("Functions");
+
+	User user;
+	Vector<Konto> konten;
+	public OverviewPage(User user, Vector<Konto> konten){
+		this.user = user;
+		this.konten = konten;
+
 		overviewLabel.setBounds(0,0,400,35);
 		overviewLabel.setFont(new Font("Serif", Font.PLAIN, 25));
 		
@@ -52,16 +62,16 @@ public class OverviewPage implements ActionListener{
 		if(e.getSource()==giroButton) {
 			System.out.println("show giro accounts");
 			//show giro accounts of user
+			for (Konto konto: konten) {
+				if (konto instanceof Girokonto) {
+					System.out.println(((Girokonto) konto).getIban());
+					System.out.println(konto.getSaldo());
+				}
+			}
 		}else if(e.getSource()==depotButton) {
 			System.out.println("show depot accounts");
 			//show depot accounts of user
-		}else if(e.getSource()==functionsButton) {
-			System.out.println("functions clicked");
-			frame.dispose();
-			//leads back to welcome page
-			WelcomePage welcomePage = new WelcomePage(null, null);
-		}
-		
+		} else {user.actionPerformed(e);}
 	}
 
 }

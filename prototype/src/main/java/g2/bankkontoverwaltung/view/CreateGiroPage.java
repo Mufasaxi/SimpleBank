@@ -8,17 +8,17 @@ import javax.swing.*;
 import java.util.Random;
 
 public class CreateGiroPage implements ActionListener {
-	JFrame  frame = new JFrame();
+	public JFrame  frame = new JFrame();
 	JLabel giroLabel = new JLabel("GIROKONTO");
 	JLabel fillLabel = new JLabel("F�llen Sie die folgenden Felder aus");
-	JTextField startSaldoField = new JTextField();
+	public JTextField startSaldoField = new JTextField();
 	JLabel saldoLabel = new JLabel("Start Saldo:");
-	JLabel saldoWarningLabel = new JLabel("Bitte nur Zahlen eingeben!");
-	JButton createButton = new JButton("Konto erstellen");
+	public JLabel saldoWarningLabel = new JLabel("Bitte nur Zahlen eingeben!");
+	public JButton createButton = new JButton("Konto erstellen");
 
 	User user;
-	String username;
-	Float saldo;
+	public String username;
+	public double saldo;
 	String IBAN;
 	
 	public CreateGiroPage(User user, String username) {
@@ -56,24 +56,7 @@ public class CreateGiroPage implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==createButton) {
-			System.out.println("create clicked");
-			System.out.println(startSaldoField.getText());
-			System.out.println(username);
-			
-			// if data entered is float
-			try {
-				saldoWarningLabel.setVisible(false);
-				this.saldo = Float.parseFloat(startSaldoField.getText());
-				frame.dispose();
-				GiroOverviewPage overViewPage = new GiroOverviewPage(user, username, saldo, IBAN);
-			// if data entered is not float
-			}catch(NumberFormatException nfe){
-				startSaldoField.setText("");
-				saldoWarningLabel.setVisible(true);
-			}
-			
-		}
+		this.user.actionPerformed(e);
 		
 	}
 	

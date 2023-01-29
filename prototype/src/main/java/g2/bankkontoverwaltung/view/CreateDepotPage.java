@@ -7,17 +7,17 @@ import java.awt.*;
 import javax.swing.*;
 
 public class CreateDepotPage implements ActionListener {
-	JFrame  frame = new JFrame();
+	public JFrame  frame = new JFrame();
 	JLabel depotLabel = new JLabel("DEPOTKONTO");
 	JLabel fillLabel = new JLabel("F�llen Sie die folgenden Felder aus");
-	JTextField referenceIDField = new JTextField();
+	public JTextField referenceIDField = new JTextField();
 	JLabel referenceIDLabel = new JLabel("Refernzkonto ID:");
-	JLabel idWarningLabel = new JLabel("Bitte nur Zahlen eingeben!");
-	JButton createButton = new JButton("Konto erstellen");
+	public JLabel idWarningLabel = new JLabel("Bitte nur Zahlen eingeben!");
+	public JButton createButton = new JButton("Konto erstellen");
 
 	User user;
-	String username;
-	Integer id;
+	public String username;
+	public Integer id;
 	
 	public CreateDepotPage(User user, String username) {
 		this.user = user;
@@ -51,25 +51,9 @@ public class CreateDepotPage implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==createButton) {
-			System.out.println("create clicked");
-			System.out.println(referenceIDField.getText());
-			System.out.println(username);
-			
-			// if data entered is float
-			try {
-				idWarningLabel.setVisible(false);
-				this.id = Integer.parseInt(referenceIDField.getText());
-				frame.dispose();
-				DepotOverviewPage overViewPage = new DepotOverviewPage(user, username, id);
-			// if data entered is not float
-			}catch(NumberFormatException nfe){
-				referenceIDField.setText("");
-				idWarningLabel.setVisible(true);
-			}
+		user.actionPerformed(e);
 			
 		}
 		
 	}
 
-}

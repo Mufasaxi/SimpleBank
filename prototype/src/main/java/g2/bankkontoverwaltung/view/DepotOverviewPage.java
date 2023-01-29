@@ -1,6 +1,7 @@
 package g2.bankkontoverwaltung.view;
 
 import g2.bankkontoverwaltung.controller.User;
+import g2.bankkontoverwaltung.model.Depotkonto;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -8,25 +9,25 @@ import javax.swing.*;
 
 public class DepotOverviewPage implements ActionListener{
 	
-	JFrame  frame = new JFrame();
+	public JFrame  frame = new JFrame();
 	JLabel overviewLabel = new JLabel("�BERSICHT");
 	JLabel userLabel = new JLabel();
 	JLabel referenceIDLabel = new JLabel();
-	JButton functionsButton = new JButton("Funktionen");
+	public JButton functionsButton = new JButton("Funktionen");
 
 	User user;
-	String username;
+	public String username;
 	Integer id;
 	
-	DepotOverviewPage(User user, String username, Integer id){
+	public DepotOverviewPage(User user, Depotkonto konto){
 		this.user = user;
-		this.username = username;
-		this.id = id;
+		this.username = konto.getBenutzername();
+		this.id = konto.getId();
 		
-		userLabel.setText("username: "+ user );
+		userLabel.setText("username: "+ username );
 		userLabel.setBounds(0,25,100,100);
 		
-		referenceIDLabel.setText("reference ID: "+ id);
+		referenceIDLabel.setText("reference ID: "+ konto.getReferenzkonten().toString());
 		referenceIDLabel.setBounds(0,50,100,100);
 		
 		overviewLabel.setBounds(0,0,400,35);
@@ -49,10 +50,7 @@ public class DepotOverviewPage implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//returns to main page
-		if(e.getSource()==functionsButton) {
-			frame.dispose();
-			WelcomePage welcomePage = new WelcomePage(user, username);
-		}
+		user.actionPerformed(e);
 		
 	}
 

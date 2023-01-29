@@ -23,15 +23,23 @@ public abstract class Konto {
     public Konto(Kunde kontoinhaber, double saldo) {
         this.benutzername = kontoinhaber.getPersonaldaten().get("username");
         this.saldo = saldo;
-        this.id = kontoinhaber.getKonto().size();
+        this.id = kontoinhaber.getKonten().size();
     }
 
-    public String getKontoinhaber() {
+    public String getBenutzername() {
         return benutzername;
+    }
+
+    public void setBenutzername(String benutzername) {
+        this.benutzername = benutzername;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getSaldo() {

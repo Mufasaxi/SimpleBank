@@ -23,7 +23,7 @@ public class JsonReader implements SaveDataIF, LoginIF{
     
     public JsonReader() {
 		this.mapper = new ObjectMapper();
-		mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+		mapper.setVisibility(PropertyAccessor.FIELD, Visibility.DEFAULT);
     }
 
 	@Override
