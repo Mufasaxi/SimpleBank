@@ -18,6 +18,7 @@ public class WelcomePage implements ActionListener{
 	JRadioButton buyButton = new JRadioButton("Aktien kaufen");
 	JRadioButton sellButton = new JRadioButton("Aktien verkaufen");
 	JRadioButton showAssetsButton = new JRadioButton("Posten anzeigen");
+	JRadioButton overviewButton = new JRadioButton("Account Overview");
 	String user;
 	Float saldo;
 	
@@ -37,28 +38,33 @@ public class WelcomePage implements ActionListener{
 		group.add(newDepotButton);
 		group.add(sellButton);
 		group.add(showAssetsButton);
+		group.add(overviewButton);
 		
 		buyButton.addActionListener(this);
 		sellButton.addActionListener(this);
 		newDepotButton.addActionListener(this);
 		showAssetsButton.addActionListener(this);
 		newGiroButton.addActionListener(this);
+		overviewButton.addActionListener(this);
 		
 		buyButton.setBounds(50,100,150,50);
 		sellButton.setBounds(50,150,150,50);
 		showAssetsButton.setBounds(50,200,150,50);
 		newDepotButton.setBounds(50,250,150,50);
 		newGiroButton.setBounds(50,300,150,50);
+		overviewButton.setBounds(50,350,150,50);
 		
 		buyButton.setFocusable(false);
 		sellButton.setFocusable(false);
 		showAssetsButton.setFocusable(false);
 		newDepotButton.setFocusable(false);
 		newGiroButton.setFocusable(false);
+		overviewButton.setFocusable(false);
 		
 		//frame
 		frame.add(functionsLabel);
 		frame.add(chooseLabel);
+		frame.add(overviewButton);
 		frame.add(buyButton);
 		frame.add(sellButton);
 		frame.add(newDepotButton);
@@ -93,6 +99,11 @@ public class WelcomePage implements ActionListener{
 			frame.dispose();
 			//leads to new page related to giros
 			CreateGiroPage giroPage = new CreateGiroPage(user);			
+		}else if(e.getSource()==overviewButton) {
+			System.out.println("overview clicked");
+			frame.dispose();
+			//leads to new page related to overview of accounts 
+			OverviewPage overviewPage = new OverviewPage();
 		}
 		
 	}
