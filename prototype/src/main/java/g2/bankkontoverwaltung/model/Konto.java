@@ -1,18 +1,33 @@
 package g2.bankkontoverwaltung.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Girokonto.class, name = "Girokonto"),
+
+    @JsonSubTypes.Type(value = Depotkonto.class, name = "Depotkonto") }
+)
 public abstract class Konto {
-    private Kunde kontoinhaber;
+    private String benutzername;
     private double saldo;
     private int id;
-
+    
+    public Konto() {
+    	super();
+    }
+    
     public Konto(Kunde kontoinhaber, double saldo) {
-        this.kontoinhaber = kontoinhaber;
+        this.benutzername = kontoinhaber.getPersonaldaten().get("benutzername");
         this.saldo = saldo;
-        this.id = this.kontoinhaber.getKonto().size();
+        this.id = kontoinhaber.getKonto().size();
     }
 
-    public Kunde getKontoinhaber() {
-        return kontoinhaber;
+    public String getKontoinhaber() {
+        return benutzername;
     }
 
     public int getId() {

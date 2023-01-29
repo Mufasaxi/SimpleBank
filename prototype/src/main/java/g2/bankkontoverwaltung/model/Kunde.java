@@ -1,11 +1,11 @@
 package g2.bankkontoverwaltung.model;
 
-import g2.bankkontoverwaltung.ObserverIF;
-import org.apache.commons.lang.IllegalClassException;
-
-import java.rmi.NoSuchObjectException;
 import java.util.HashMap;
 import java.util.Vector;
+
+import org.apache.commons.lang.IllegalClassException;
+
+import g2.bankkontoverwaltung.ObserverIF;
 
 public class Kunde implements KundeIF, ObservableIF {
 //    personalausweis HashMap Beispiel:
@@ -41,15 +41,18 @@ public class Kunde implements KundeIF, ObservableIF {
     }
 
     @Override
-    public void createGirokonto(double anfangssaldo) {
+    public Girokonto createGirokonto(double anfangssaldo) {
         Girokonto newKonto = new Girokonto(this, anfangssaldo);
         this.konten.add(newKonto);
+        return newKonto;
     }
 
     @Override
-    public void createDepotkonto(int referenzkontoId) throws IllegalClassException, ArrayIndexOutOfBoundsException {
+    public Depotkonto createDepotkonto(int referenzkontoId) throws IllegalClassException, ArrayIndexOutOfBoundsException {
         Depotkonto newKonto = new Depotkonto(this);
-        newKonto.addReferenzkonto(referenzkontoId);
+        newKonto.addReferenzkonto(this.getKonto(referenzkontoId));
+        this.konten.add(newKonto);
+        return newKonto;
     }
 
     @Override

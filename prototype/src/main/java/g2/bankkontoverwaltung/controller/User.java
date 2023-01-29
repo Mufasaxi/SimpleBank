@@ -1,13 +1,12 @@
 package g2.bankkontoverwaltung.controller;
 
-import g2.bankkontoverwaltung.ObserverIF;
-import g2.bankkontoverwaltung.model.Kunde;
-import g2.bankkontoverwaltung.storage.JsonReader;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+
+import g2.bankkontoverwaltung.ObserverIF;
+import g2.bankkontoverwaltung.model.Kunde;
+import g2.bankkontoverwaltung.storage.JsonReader;
 
 
 public class User implements ActionListener, ObserverIF {
