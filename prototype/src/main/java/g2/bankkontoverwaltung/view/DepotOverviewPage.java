@@ -14,6 +14,7 @@ public class DepotOverviewPage implements ActionListener{
 	JLabel userLabel = new JLabel();
 	JLabel referenceIDLabel = new JLabel();
 	public JButton functionsButton = new JButton("Funktionen");
+	JLabel saldoLabel = new JLabel();
 
 	User user;
 	public String username;
@@ -30,6 +31,9 @@ public class DepotOverviewPage implements ActionListener{
 		referenceIDLabel.setText("reference ID: "+ konto.getReferenzkonten().toString());
 		referenceIDLabel.setBounds(0,50,100,100);
 		
+		saldoLabel.setText("Saldo");
+		saldoLabel.setBounds(0,75,100,100);
+		
 		overviewLabel.setBounds(0,0,400,35);
 		overviewLabel.setFont(new Font("Serif", Font.PLAIN, 25));
 		
@@ -38,6 +42,7 @@ public class DepotOverviewPage implements ActionListener{
 		functionsButton.addActionListener(this);
 		
 		frame.add(functionsButton);
+		frame.add(saldoLabel);
 		frame.add(referenceIDLabel);
 		frame.add(userLabel);
 		frame.add(overviewLabel);
