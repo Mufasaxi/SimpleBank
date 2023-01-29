@@ -1,9 +1,14 @@
 package g2.bankkontoverwaltung.view;
 
+import g2.bankkontoverwaltung.controller.User;
+import g2.bankkontoverwaltung.storage.JsonReader;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.HashMap;
 
 import javax.swing.*;
@@ -12,22 +17,22 @@ public class RegistrationPage implements ActionListener{
 	JFrame  frame = new JFrame();
 	JLabel registerLabel = new JLabel("ANMELDUNG");
 	JLabel fillLabel = new JLabel("F�llen Sie die folgenden Felder aus");
-	JTextField nameField = new JTextField();
-	JTextField addressField = new JTextField();
-	JTextField userField = new JTextField();
-	JPasswordField passField = new JPasswordField();
+	public JTextField nameField = new JTextField();
+	public JTextField addressField = new JTextField();
+	public JTextField userField = new JTextField();
+	public JPasswordField passField = new JPasswordField();
 	JPasswordField confirmPassField = new JPasswordField();
 	JLabel nameLabel = new JLabel("name:");
 	JLabel addressLabel = new JLabel("address:");
 	JLabel userLabel = new JLabel("username:");
 	JLabel passLabel = new JLabel("password:");
 	JLabel confirmPassLabel = new JLabel("confirm password:");
-	JButton createButton = new JButton("Anmelden");
-	
-	HashMap<String,String> loginData = new HashMap<String,String>();
-	
-	RegistrationPage(HashMap<String, String> originalLoginData){
-		this.loginData = originalLoginData;
+	public JButton createButton = new JButton("Anmelden");
+
+	private User user;
+
+	public RegistrationPage(User user){
+		this.user = user;
 		
 		registerLabel.setBounds(0,0,400,35);
 		registerLabel.setFont(new Font("Serif", Font.PLAIN, 25));
@@ -71,14 +76,7 @@ public class RegistrationPage implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==createButton) {
-			System.out.println(this.loginData);
-			System.out.println("creating");
-			if(this.loginData.containsKey(userField.getText())) {
-				System.out.println("username already exists choose another");
-			}
-		}
-		
+		user.actionPerformed(e);
 	}
 
 }

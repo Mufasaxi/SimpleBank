@@ -1,5 +1,7 @@
 package g2.bankkontoverwaltung.view;
 
+import g2.bankkontoverwaltung.controller.User;
+
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
@@ -11,12 +13,14 @@ public class DepotOverviewPage implements ActionListener{
 	JLabel userLabel = new JLabel();
 	JLabel saldoLabel = new JLabel();
 	JButton functionsButton = new JButton("Funktionen");
-	
-	String user;
+
+	User user;
+	String username;
 	Float saldo;
 	
-	DepotOverviewPage(String user, Float saldo){
+	DepotOverviewPage(User user, String username, Float saldo){
 		this.user = user;
+		this.username = username;
 		this.saldo = saldo;
 		
 		userLabel.setText("username: "+ user );
@@ -47,7 +51,7 @@ public class DepotOverviewPage implements ActionListener{
 		//returns to main page
 		if(e.getSource()==functionsButton) {
 			frame.dispose();
-			WelcomePage welcomePage = new WelcomePage(user, saldo);
+			WelcomePage welcomePage = new WelcomePage(user, username);
 		}
 		
 	}

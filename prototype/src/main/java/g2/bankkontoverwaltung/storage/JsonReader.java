@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,7 +36,7 @@ public class JsonReader implements SaveDataIF, LoginIF{
 
     @Override
     public void saveKunde(Kunde kunde) throws IOException {
-    	Path path = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/" + kunde.getPersonaldaten().get("benutzername") + ".json");
+    	Path path = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/" + kunde.getPersonaldaten().get("username") + ".json");
     	Files.deleteIfExists(path);
     	Files.createFile(path);
         mapper.writeValue(new File(path.toString()), kunde);
@@ -55,7 +56,10 @@ public class JsonReader implements SaveDataIF, LoginIF{
     @Override
     public void saveLogin(String benutzername, String password) throws IOException {
     	Path path = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/" + benutzername + ".login");
-    	File newFile = new File(path.toString());
+        File newFile = new File(path.toString());
+        if (newFile.exists()) {
+            throw new FileAlreadyExistsException(benutzername);
+        }
     	FileWriter writer = new FileWriter(newFile);
     	writer.write(password);
     	writer.close();

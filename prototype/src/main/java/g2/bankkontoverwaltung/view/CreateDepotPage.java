@@ -1,5 +1,7 @@
 package g2.bankkontoverwaltung.view;
 
+import g2.bankkontoverwaltung.controller.User;
+
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
@@ -12,11 +14,14 @@ public class CreateDepotPage implements ActionListener {
 	JLabel saldoLabel = new JLabel("Start Saldo:");
 	JLabel saldoWarningLabel = new JLabel("Bitte nur Zahlen eingeben!");
 	JButton createButton = new JButton("Konto erstellen");
-	String user;
+
+	User user;
+	String username;
 	Float saldo;
 	
-	CreateDepotPage(String user) {
+	public CreateDepotPage(User user, String username) {
 		this.user = user;
+		this.username = username;
 		
 		depotLabel.setBounds(0,0,400,35);
 		depotLabel.setFont(new Font("Serif", Font.PLAIN, 25));
@@ -49,14 +54,14 @@ public class CreateDepotPage implements ActionListener {
 		if(e.getSource()==createButton) {
 			System.out.println("create clicked");
 			System.out.println(startSaldoField.getText());
-			System.out.println(user);
+			System.out.println(username);
 			
 			// if data entered is float
 			try {
 				saldoWarningLabel.setVisible(false);
 				this.saldo = Float.parseFloat(startSaldoField.getText());
 				frame.dispose();
-				DepotOverviewPage overViewPage = new DepotOverviewPage(user, saldo);
+				DepotOverviewPage overViewPage = new DepotOverviewPage(user, username, saldo);
 			// if data entered is not float
 			}catch(NumberFormatException nfe){
 				startSaldoField.setText("");

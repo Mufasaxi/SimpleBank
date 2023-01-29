@@ -1,5 +1,7 @@
 package g2.bankkontoverwaltung.view;
 
+import g2.bankkontoverwaltung.controller.User;
+
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
@@ -12,12 +14,13 @@ public class GiroOverviewPage implements ActionListener {
 	JLabel saldoLabel = new JLabel();
 	JLabel ibanLabel = new JLabel();
 	JButton functionsButton = new JButton("Funktionen");
-	
-	String user;
+
+	User user;
+	String username;
 	Float saldo;
 	String IBAN;
 	
-	GiroOverviewPage(String user, Float saldo, String IBAN){
+	GiroOverviewPage(User user, String username, Float saldo, String IBAN){
 		this.user = user;
 		this.saldo = saldo;
 		this.IBAN = IBAN;
@@ -55,7 +58,7 @@ public class GiroOverviewPage implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==functionsButton) {
 			frame.dispose();
-			WelcomePage welcomePage = new WelcomePage(user, saldo);
+			WelcomePage welcomePage = new WelcomePage(this.user, username);
 		}
 		
 	}

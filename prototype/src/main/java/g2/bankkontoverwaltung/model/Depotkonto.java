@@ -24,7 +24,6 @@ public class Depotkonto extends Konto{
     }
 
     public void addReferenzkonto(Konto referenzkonto) throws IllegalClassException, ArrayIndexOutOfBoundsException {
-//        Konto referenzkonto = this.getKontoinhaber().getKonto(id);
         if (referenzkonto instanceof Girokonto) {
             this.referenzkonten.add(referenzkonto);
         } else {

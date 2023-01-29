@@ -15,10 +15,10 @@ public class KundeTest {
 	@Test
 	public void testPersonaldaten() {
 		HashMap<String, String> personaldaten = new HashMap<>();
-		personaldaten.put("benutzername", "example1");
+		personaldaten.put("username", "example1");
 		personaldaten.put("name", "Max Mustermann");
-		personaldaten.put("adresse", "Leibnizstraße 20");
-		personaldaten.put("telefonnummer", "+49111222333");
+		personaldaten.put("address", "Leibnizstraße 20");
+		personaldaten.put("phone", "+49111222333");
 		testObject = new Kunde(personaldaten);
 		
 		assert testObject.getPersonaldaten().get("benutzername") == "example1";
@@ -31,7 +31,7 @@ public class KundeTest {
 		assert testObject.getKonto(0) instanceof Girokonto;
 		assert testObject.getKonto(0).getSaldo() == 100;
 		
-		assert testObject.getKonto(0).getKontoinhaber() == testObject.getPersonaldaten().get("benutzername");
+		assert testObject.getKonto(0).getKontoinhaber() == testObject.getPersonaldaten().get("username");
 		
 		testObject.createDepotkonto(0);
 		

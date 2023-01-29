@@ -1,6 +1,8 @@
 package g2.bankkontoverwaltung.view;
 
 
+import g2.bankkontoverwaltung.controller.User;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -10,21 +12,23 @@ import javax.swing.*;
 
 public class WelcomePage implements ActionListener{
 	
-	JFrame frame = new JFrame();
+	public JFrame frame = new JFrame();
 	JLabel functionsLabel = new JLabel("KONTO FUNKTIONEN");
 	JLabel chooseLabel = new JLabel("W�hlen Sie eine der folgenden Funktionen");
-	JRadioButton newDepotButton = new JRadioButton("Depotkonto er�ffnen");
-	JRadioButton newGiroButton = new JRadioButton("Girokonto er�ffnen");
-	JRadioButton buyButton = new JRadioButton("Aktien kaufen");
-	JRadioButton sellButton = new JRadioButton("Aktien verkaufen");
-	JRadioButton showAssetsButton = new JRadioButton("Posten anzeigen");
-	String user;
+	public JRadioButton newDepotButton = new JRadioButton("Depotkonto er�ffnen");
+	public JRadioButton newGiroButton = new JRadioButton("Girokonto er�ffnen");
+	public JRadioButton buyButton = new JRadioButton("Aktien kaufen");
+	public JRadioButton sellButton = new JRadioButton("Aktien verkaufen");
+	public JRadioButton showAssetsButton = new JRadioButton("Posten anzeigen");
+
+	public User user;
+	public String username;
 	Float saldo;
 	
-	WelcomePage(String user, Float saldo){
+	public WelcomePage(User user, String username){
 		this.user = user;
-		this.saldo = saldo;
-		
+		this.username = username;
+
 		functionsLabel.setBounds(0,0,400,35);
 		functionsLabel.setFont(new Font("Serif", Font.PLAIN, 25));
 		
@@ -74,26 +78,7 @@ public class WelcomePage implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==buyButton) {
-			System.out.println("buy clicked");
-			//leads to new page related to buying (NON CENTRAL)
-		}else if(e.getSource()==sellButton) {
-			System.out.println("sell clicked");
-			//leads to new page related to selling (NON CENTRAL)
-		}else if(e.getSource()==showAssetsButton) {
-			System.out.println("show clicked");
-			//leads to new page related to assets (NON CENTRAL)
-		}else if(e.getSource()==newDepotButton) {
-			System.out.println("new clicked");
-			frame.dispose();
-			//leads to new page related to depots
-			CreateDepotPage depotPage = new CreateDepotPage(user);			
-		}else if(e.getSource()==newGiroButton) {
-			System.out.println("new clicked");
-			frame.dispose();
-			//leads to new page related to giros
-			CreateGiroPage giroPage = new CreateGiroPage(user);			
-		}
+		user.actionPerformed(e);
 		
 	}
 

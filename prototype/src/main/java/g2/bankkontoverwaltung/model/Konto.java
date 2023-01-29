@@ -21,7 +21,7 @@ public abstract class Konto {
     }
     
     public Konto(Kunde kontoinhaber, double saldo) {
-        this.benutzername = kontoinhaber.getPersonaldaten().get("benutzername");
+        this.benutzername = kontoinhaber.getPersonaldaten().get("username");
         this.saldo = saldo;
         this.id = kontoinhaber.getKonto().size();
     }

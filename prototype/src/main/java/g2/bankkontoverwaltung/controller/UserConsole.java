@@ -111,7 +111,7 @@ public class UserConsole implements ActionListener, ObserverIF {
 		this.identity = new Kunde(personaldaten);
 		
 		benutzername = readLine("Benutzername: ");
-		this.identity.setPersonalData("benutzername", benutzername);
+		this.identity.setPersonalData("username", benutzername);
 		while (true) {
 			password = readLine("Password: ");
 		    Pattern passwordRegex = Pattern.compile("^\\w{9,}$");

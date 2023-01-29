@@ -1,5 +1,7 @@
 package g2.bankkontoverwaltung.view;
 
+import g2.bankkontoverwaltung.controller.User;
+
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
@@ -13,13 +15,15 @@ public class CreateGiroPage implements ActionListener {
 	JLabel saldoLabel = new JLabel("Start Saldo:");
 	JLabel saldoWarningLabel = new JLabel("Bitte nur Zahlen eingeben!");
 	JButton createButton = new JButton("Konto erstellen");
-	
-	String user;
+
+	User user;
+	String username;
 	Float saldo;
 	String IBAN;
 	
-	CreateGiroPage(String user) {
+	public CreateGiroPage(User user, String username) {
 		this.user = user;
+		this.username = username;
 		this.IBAN = generateIBAN();
 		
 		giroLabel.setBounds(0,0,400,35);
@@ -55,14 +59,14 @@ public class CreateGiroPage implements ActionListener {
 		if(e.getSource()==createButton) {
 			System.out.println("create clicked");
 			System.out.println(startSaldoField.getText());
-			System.out.println(user);
+			System.out.println(username);
 			
 			// if data entered is float
 			try {
 				saldoWarningLabel.setVisible(false);
 				this.saldo = Float.parseFloat(startSaldoField.getText());
 				frame.dispose();
-				GiroOverviewPage overViewPage = new GiroOverviewPage(user, saldo, IBAN);
+				GiroOverviewPage overViewPage = new GiroOverviewPage(user, username, saldo, IBAN);
 			// if data entered is not float
 			}catch(NumberFormatException nfe){
 				startSaldoField.setText("");

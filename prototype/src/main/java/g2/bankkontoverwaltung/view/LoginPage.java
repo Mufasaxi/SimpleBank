@@ -1,30 +1,33 @@
 package g2.bankkontoverwaltung.view;
 
 
+import g2.bankkontoverwaltung.controller.User;
+import g2.bankkontoverwaltung.storage.JsonReader;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import javax.swing.*;
 
 public class LoginPage implements ActionListener{
-	JFrame  frame = new JFrame();
-	JButton loginButton = new JButton("Login");
-	JButton resetButton = new JButton("Reset");
-	JButton newUserButton = new JButton("Neue Kunde");
-	JTextField userField = new JTextField();
-	JPasswordField passField = new JPasswordField();
+	public JFrame  frame = new JFrame();
+	public JButton loginButton = new JButton("Login");
+	public JButton resetButton = new JButton("Reset");
+	public JButton newUserButton = new JButton("Neue Kunde");
+	public JTextField userField = new JTextField();
+	public JPasswordField passField = new JPasswordField();
 	JLabel userLabel = new JLabel("username:");
 	JLabel passLabel = new JLabel("password:");
-	JLabel loginMessageLabel = new JLabel();
-	
-	HashMap<String,String> loginData = new HashMap<String,String>();
-	
-	LoginPage(HashMap<String, String> originalLoginData){
-		
-		this.loginData = originalLoginData;
-		
+	public JLabel loginMessageLabel = new JLabel();
+
+	private User user;
+
+	public LoginPage(User user){
+		this.user = user;
+
 		userLabel.setBounds(50,100,75,25);
 		passLabel.setBounds(50,150,75,25);
 		
@@ -61,49 +64,10 @@ public class LoginPage implements ActionListener{
 		frame.add(newUserButton);
 	}
 
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//creates new user account
-		if(e.getSource()==newUserButton) {
-			System.out.println("new user create");
-			//leads to new page related to creating user
-			RegistrationPage registrationPage = new RegistrationPage(loginData);
-		}
-		
-		//reset text fields if user wants to erase what they wrote
-		else if(e.getSource()==resetButton) {
-			userField.setText("");
-			passField.setText("");
-			loginMessageLabel.setText("");
-			frame.dispose();
-			//REMOVE AFTER TESTING
-			WelcomePage welcomePage = new WelcomePage(null,null);//shortcut for testing
-		}
-		
-		//logs user in after verifying login data
-		else if(e.getSource()==loginButton) {
-			String user = userField.getText();
-			String pass = String.valueOf(passField.getPassword());
-			
-			//checks if entered login data matches the data stored in the hash map
-			if(loginData.containsKey(user)) {
-				if(loginData.get(user).equals(pass)) {
-					loginMessageLabel.setForeground(Color.green);
-					loginMessageLabel.setText("Login successful");
-					frame.dispose();
-					WelcomePage welcomePage = new WelcomePage(user,null);
-				}else {
-					loginMessageLabel.setForeground(Color.red);
-					loginMessageLabel.setText("Wrong Login Data");
-				}
-			//if no data entered same error message shown on screen
-			}else {
-				loginMessageLabel.setForeground(Color.red);
-				loginMessageLabel.setText("Wrong Login Data");
-			}
-		}
-		
-		
+		user.actionPerformed(e);
 	}
 	
 }
