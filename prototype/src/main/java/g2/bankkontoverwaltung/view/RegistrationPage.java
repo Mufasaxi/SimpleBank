@@ -14,7 +14,7 @@ import java.util.HashMap;
 import javax.swing.*;
 
 public class RegistrationPage implements ActionListener{
-	JFrame  frame = new JFrame();
+	public JFrame  frame = new JFrame();
 	JLabel registerLabel = new JLabel("ANMELDUNG");
 	JLabel fillLabel = new JLabel("F�llen Sie die folgenden Felder aus");
 	public JTextField nameField = new JTextField();

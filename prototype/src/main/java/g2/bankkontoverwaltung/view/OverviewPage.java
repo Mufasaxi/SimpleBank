@@ -15,7 +15,7 @@ public class OverviewPage implements ActionListener{
 	JRadioButton depotButton = new JRadioButton("Depot");
 	JButton functionsButton = new JButton("Functions");
 	
-	OverviewPage(){
+	public OverviewPage(){
 		overviewLabel.setBounds(0,0,400,35);
 		overviewLabel.setFont(new Font("Serif", Font.PLAIN, 25));
 		

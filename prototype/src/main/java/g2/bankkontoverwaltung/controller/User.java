@@ -24,6 +24,7 @@ public class User implements ActionListener, ObserverIF {
     private CreateGiroPage createGiroPage;
     private GiroOverviewPage giroOverviewPage;
     private DepotOverviewPage depotOverviewPage;
+    private OverviewPage overviewPage;
 
     public User() {
         this.jr = new JsonReader();
@@ -37,6 +38,7 @@ public class User implements ActionListener, ObserverIF {
         //creates new user account
         if(e.getSource()==loginPage.newUserButton) {
             System.out.println("new user create");
+            loginPage.frame.dispose();
             //leads to new page related to creating user
             this.registrationPage = new RegistrationPage(this);
 
@@ -78,10 +80,7 @@ public class User implements ActionListener, ObserverIF {
             }
             //if no data entered same error message shown on screen
 
-        }
-
-        // Registration Page
-        if(e.getSource()==registrationPage.createButton) {
+        } else if(e.getSource()==registrationPage.createButton) {
             System.out.println("creating");
 
             JsonReader jr = new JsonReader();
@@ -94,33 +93,28 @@ public class User implements ActionListener, ObserverIF {
                 personaldaten.put("address", registrationPage.addressField.getText());
                 Kunde newKunde = new Kunde(personaldaten);
                 this.identity = newKunde;
+                jr.saveKunde(newKunde);
+                registrationPage.frame.dispose();
+                this.welcomePage = new WelcomePage(this, registrationPage.userField.getText());
             } catch (FileAlreadyExistsException ex) {
                 System.out.println("username already exists choose another");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-        }
-
-        // Welcome Page
-        if(e.getSource()==welcomePage.buyButton) {
-            System.out.println("buy clicked");
-            //leads to new page related to buying (NON CENTRAL)
-        }else if(e.getSource()==welcomePage.sellButton) {
-            System.out.println("sell clicked");
-            //leads to new page related to selling (NON CENTRAL)
-        }else if(e.getSource()==welcomePage.showAssetsButton) {
-            System.out.println("show clicked");
-            //leads to new page related to assets (NON CENTRAL)
-        }else if(e.getSource()==welcomePage.newDepotButton) {
+        } else if(e.getSource()==welcomePage.newDepotButton) {
             System.out.println("new clicked");
             welcomePage.frame.dispose();
             //leads to new page related to depots
-            CreateDepotPage depotPage = new CreateDepotPage(welcomePage.user, welcomePage.username);
+            this.createDepotPage = new CreateDepotPage(welcomePage.user, welcomePage.username);
         }else if(e.getSource()==welcomePage.newGiroButton) {
             System.out.println("new clicked");
             welcomePage.frame.dispose();
             //leads to new page related to giros
-            CreateGiroPage giroPage = new CreateGiroPage(welcomePage.user, welcomePage.username);
+            this.createGiroPage = new CreateGiroPage(welcomePage.user, welcomePage.username);
+        } else if(e.getSource()==welcomePage.overviewButton) {
+            System.out.println("overview clicked");
+            welcomePage.frame.dispose();
+            this.overviewPage = new OverviewPage();
         }
     }
 
