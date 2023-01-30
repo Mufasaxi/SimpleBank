@@ -1,0 +1,1 @@
+{"personaldaten":{"aufenthaltstitel":"DE12345","name":"Max Mustermann","adresse":"Leibnizstraße 20","telefonnummer":"+49111222333","benutzername":"example1"},"konten":[{"@type":"Girokonto","benutzername":null,"saldo":100.0,"id":0,"iban":"DE99012345670000000000"},{"@type":"Depotkonto","benutzername":null,"saldo":0.0,"id":1,"referenzkonten":[0],"aktien":[]}]}

@@ -54,7 +54,7 @@ public class User implements ActionListener, ObserverIF {
             loginPage.loginMessageLabel.setText("");
             loginPage.frame.dispose();
             //REMOVE AFTER TESTING
-            this.welcomePage = new WelcomePage(this, null);//shortcut for testing
+//            this.welcomePage = new WelcomePage(this, null);//shortcut for testing
         }
 
         //logs user in after verifying login data
