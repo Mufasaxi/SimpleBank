@@ -9,12 +9,12 @@ import javax.swing.*;
 
 public class GiroOverviewPage implements ActionListener {
 
-    public JFrame frame = new JFrame();
-    JLabel overviewLabel = new JLabel("�BERSICHT");
+    public JFrame frame = new JFrame("Giro Overview");
+    JLabel overviewLabel = new JLabel("OVERVIEW");
     JLabel userLabel = new JLabel();
     JLabel saldoLabel = new JLabel();
     JLabel ibanLabel = new JLabel();
-    public JButton functionsButton = new JButton("Funktionen");
+    public JButton functionsButton = new JButton("Functions");
 
     User user;
     public String username;
@@ -28,13 +28,13 @@ public class GiroOverviewPage implements ActionListener {
         this.IBAN = konto.getIban();
 
         userLabel.setText("username: " + username);
-        userLabel.setBounds(0, 25, 100, 100);
+        userLabel.setBounds(0, 25, 150, 100);
 
-        saldoLabel.setText("saldo: " + saldo);
+        saldoLabel.setText("balance: " + saldo);
         saldoLabel.setBounds(0, 50, 100, 100);
 
         ibanLabel.setText("IBAN: " + IBAN);
-        ibanLabel.setBounds(0, 75, 175, 100);
+        ibanLabel.setBounds(0, 75, 200, 100);
 
 
         overviewLabel.setBounds(0, 0, 400, 35);

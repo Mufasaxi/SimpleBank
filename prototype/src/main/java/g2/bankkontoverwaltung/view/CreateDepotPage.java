@@ -7,13 +7,13 @@ import java.awt.*;
 import javax.swing.*;
 
 public class CreateDepotPage implements ActionListener {
-	public JFrame  frame = new JFrame();
-	JLabel depotLabel = new JLabel("DEPOTKONTO");
-	JLabel fillLabel = new JLabel("F�llen Sie die folgenden Felder aus");
+	public JFrame  frame = new JFrame("Create Depot");
+	JLabel depotLabel = new JLabel("DEPOT ACCOUNTS");
+	JLabel fillLabel = new JLabel("Please fill out the following fields");
 	public JTextField referenceIDField = new JTextField();
-	JLabel referenceIDLabel = new JLabel("Refernzkonto ID:");
-	public JLabel idWarningLabel = new JLabel("Bitte nur Zahlen eingeben!");
-	public JButton createButton = new JButton("Konto erstellen");
+	JLabel referenceIDLabel = new JLabel("Reference Account ID:");
+	public JLabel idWarningLabel = new JLabel("Please only enter numbers!");
+	public JButton createButton = new JButton("Create account");
 
 	User user;
 	public String username;
@@ -28,8 +28,8 @@ public class CreateDepotPage implements ActionListener {
 		
 		fillLabel.setBounds(0,25,400,100);
 		
-		referenceIDLabel.setBounds(50,100,75,25);
-		referenceIDField.setBounds(125,100,200,25);
+		referenceIDLabel.setBounds(0,100,150,25);
+		referenceIDField.setBounds(150,100,200,25);
 		idWarningLabel.setBounds(150,150,200,25);
 		idWarningLabel.setVisible(false);
 		

@@ -9,11 +9,11 @@ import javax.swing.*;
 
 public class DepotOverviewPage implements ActionListener{
 	
-	public JFrame  frame = new JFrame();
-	JLabel overviewLabel = new JLabel("�BERSICHT");
+	public JFrame  frame = new JFrame("Depot Overview");
+	JLabel overviewLabel = new JLabel("OVERVIEW");
 	JLabel userLabel = new JLabel();
 	JLabel referenceIDLabel = new JLabel();
-	public JButton functionsButton = new JButton("Funktionen");
+	public JButton functionsButton = new JButton("Functions");
 	JLabel saldoLabel = new JLabel();
 
 	User user;
@@ -26,13 +26,13 @@ public class DepotOverviewPage implements ActionListener{
 		this.id = konto.getId();
 		
 		userLabel.setText("username: "+ username );
-		userLabel.setBounds(0,25,100,100);
+		userLabel.setBounds(0,25,125,100);
 		
 		referenceIDLabel.setText("reference ID: "+ konto.getReferenzkonten().toString());
 		referenceIDLabel.setBounds(0,50,100,100);
 		
-		saldoLabel.setText("Saldo");
-		saldoLabel.setBounds(0,75,100,100);
+		saldoLabel.setText("Balance: "+ konto.getSaldo());
+		saldoLabel.setBounds(0,75,150,100);
 		
 		overviewLabel.setBounds(0,0,400,35);
 		overviewLabel.setFont(new Font("Serif", Font.PLAIN, 25));

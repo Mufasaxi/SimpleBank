@@ -12,15 +12,15 @@ import javax.swing.*;
 
 public class WelcomePage implements ActionListener{
 	
-	public JFrame frame = new JFrame();
-	JLabel functionsLabel = new JLabel("KONTO FUNKTIONEN");
-	JLabel chooseLabel = new JLabel("W�hlen Sie eine der folgenden Funktionen");
+	public JFrame frame = new JFrame("Bank account management");
+	JLabel functionsLabel = new JLabel("ACCOUNT FUNCTIONS");
+	JLabel chooseLabel = new JLabel("Please choose one of the following functions");
 
-	public JRadioButton newDepotButton = new JRadioButton("Depotkonto er�ffnen");
-	public JRadioButton newGiroButton = new JRadioButton("Girokonto er�ffnen");
-	public JRadioButton buyButton = new JRadioButton("Aktien kaufen");
-	public JRadioButton sellButton = new JRadioButton("Aktien verkaufen");
-	public JRadioButton showAssetsButton = new JRadioButton("Posten anzeigen");
+	public JRadioButton newDepotButton = new JRadioButton("create Depot account");
+	public JRadioButton newGiroButton = new JRadioButton("create Giro account");
+	public JRadioButton buyButton = new JRadioButton("buy Stocks");
+	public JRadioButton sellButton = new JRadioButton("sell Stocks");
+	public JRadioButton showAssetsButton = new JRadioButton("show Assets");
 	public JRadioButton overviewButton = new JRadioButton("Account Overview");
 
 	public User user;

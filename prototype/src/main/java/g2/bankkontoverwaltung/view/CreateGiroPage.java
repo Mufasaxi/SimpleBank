@@ -8,13 +8,13 @@ import javax.swing.*;
 import java.util.Random;
 
 public class CreateGiroPage implements ActionListener {
-	public JFrame  frame = new JFrame();
-	JLabel giroLabel = new JLabel("GIROKONTO");
-	JLabel fillLabel = new JLabel("F�llen Sie die folgenden Felder aus");
+	public JFrame  frame = new JFrame("Create Giro");
+	JLabel giroLabel = new JLabel("GIRO ACCOUNTS");
+	JLabel fillLabel = new JLabel("Please fill out the following fields");
 	public JTextField startSaldoField = new JTextField();
-	JLabel saldoLabel = new JLabel("Start Saldo:");
-	public JLabel saldoWarningLabel = new JLabel("Bitte nur Zahlen eingeben!");
-	public JButton createButton = new JButton("Konto erstellen");
+	JLabel saldoLabel = new JLabel("Start Balance:");
+	public JLabel saldoWarningLabel = new JLabel("Please only enter number!");
+	public JButton createButton = new JButton("Create account");
 
 	User user;
 	public String username;
@@ -24,14 +24,14 @@ public class CreateGiroPage implements ActionListener {
 	public CreateGiroPage(User user, String username) {
 		this.user = user;
 		this.username = username;
-		this.IBAN = generateIBAN();
+//		this.IBAN = generateIBAN();
 		
 		giroLabel.setBounds(0,0,400,35);
 		giroLabel.setFont(new Font("Serif", Font.PLAIN, 25));
 		
 		fillLabel.setBounds(0,25,400,100);
 		
-		saldoLabel.setBounds(50,100,75,25);
+		saldoLabel.setBounds(25,100,100,25);
 		startSaldoField.setBounds(125,100,200,25);
 		saldoWarningLabel.setBounds(150,150,200,25);
 		saldoWarningLabel.setVisible(false);
@@ -61,31 +61,31 @@ public class CreateGiroPage implements ActionListener {
 	}
 	
 	//randomly generates an IBAN for each new giro account made
-	public String generateIBAN() {
-		String IBAN = "DE";
-		Random number = new Random();
-		
-		int num1 = number.nextInt(10);
-		int num2 = number.nextInt(10);
-		IBAN += Integer.toString(num1) + Integer.toString(num2) + " ";
-		
-		int count = 0;
-	    int n = 0;
-	    for(int i =0; i < 12;i++)
-	    {
-	        if(count == 4)
-	        {
-	            IBAN += " ";
-	            count =0;
-	        }
-	        else 
-	            n = number.nextInt(10);
-	            IBAN += Integer.toString(n);
-	            count++;            
-
-	    }
-		
-		return IBAN;
-	}
+//	public String generateIBAN() {
+//		String IBAN = "DE";
+//		Random number = new Random();
+//		
+//		int num1 = number.nextInt(10);
+//		int num2 = number.nextInt(10);
+//		IBAN += Integer.toString(num1) + Integer.toString(num2) + " ";
+//		
+//		int count = 0;
+//	    int n = 0;
+//	    for(int i =0; i < 12;i++)
+//	    {
+//	        if(count == 4)
+//	        {
+//	            IBAN += " ";
+//	            count =0;
+//	        }
+//	        else 
+//	            n = number.nextInt(10);
+//	            IBAN += Integer.toString(n);
+//	            count++;            
+//
+//	    }
+//		
+//		return IBAN;
+//	}
 	
 }

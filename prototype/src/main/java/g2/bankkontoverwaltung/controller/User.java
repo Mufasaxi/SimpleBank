@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import g2.bankkontoverwaltung.ObserverIF;
 import g2.bankkontoverwaltung.model.Girokonto;
@@ -86,17 +88,35 @@ public class User implements ActionListener, ObserverIF {
 
             JsonReader jr = new JsonReader();
             try {
-                jr.saveLogin(registrationPage.userField.getText(), String.valueOf(registrationPage.passField.getPassword()));
-
-                HashMap<String, String> personaldaten = new HashMap<>();
-                personaldaten.put("username", registrationPage.userField.getText());
-                personaldaten.put("name", registrationPage.nameField.getText());
-                personaldaten.put("address", registrationPage.addressField.getText());
-                Kunde newKunde = new Kunde(personaldaten);
-                this.identity = newKunde;
-                jr.saveKunde(newKunde);
-                registrationPage.frame.dispose();
-                this.welcomePage = new WelcomePage(this, registrationPage.userField.getText());
+            	
+        		String password = String.valueOf(registrationPage.passField.getPassword());
+    		    Pattern passwordRegex = Pattern.compile("^\\w{9,}$");
+    		    Matcher matcher = passwordRegex.matcher(password);
+    		    
+    		    if (!matcher.find()) {//...getPassword().equals(registrationPage...
+    		    	System.out.println("Mind. 9 Zeichen aus Alphabet und Nummern!");
+    		    	registrationPage.passWarningLabel.setVisible(true);
+//    		    }else if(!registrationPage.passField.getPassword().equals(registrationPage.confirmPassField.getPassword())) {
+//    		    	System.out.println("Passworter mussen sich einigen");
+//    		    	System.out.println(registrationPage.passField.getPassword());
+//    		    	System.out.println(registrationPage.confirmPassField.getPassword());
+//    		    	registrationPage.confirmWarningLabel.setVisible(true);
+//    		    	
+    		    } else {
+    		    	registrationPage.passWarningLabel.setVisible(false);
+	                jr.saveLogin(registrationPage.userField.getText(), String.valueOf(registrationPage.passField.getPassword()));
+	
+	                HashMap<String, String> personaldaten = new HashMap<>();
+	                personaldaten.put("username", registrationPage.userField.getText());
+	                personaldaten.put("name", registrationPage.nameField.getText());
+	                personaldaten.put("address", registrationPage.addressField.getText());
+	                Kunde newKunde = new Kunde(personaldaten);
+	                this.identity = newKunde;
+	                
+	                jr.saveKunde(newKunde);
+	                registrationPage.frame.dispose();
+	                this.welcomePage = new WelcomePage(this, registrationPage.userField.getText());
+    		    }
             } catch (FileAlreadyExistsException ex) {
                 System.out.println("username already exists choose another");
             } catch (IOException ex) {

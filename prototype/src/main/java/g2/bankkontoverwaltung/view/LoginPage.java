@@ -13,10 +13,10 @@ import java.util.HashMap;
 import javax.swing.*;
 
 public class LoginPage implements ActionListener{
-	public JFrame  frame = new JFrame();
+	public JFrame  frame = new JFrame("Login");
 	public JButton loginButton = new JButton("Login");
 	public JButton resetButton = new JButton("Reset");
-	public JButton newUserButton = new JButton("Neue Kunde");
+	public JButton newUserButton = new JButton("New User");
 	public JTextField userField = new JTextField();
 	public JPasswordField passField = new JPasswordField();
 	JLabel userLabel = new JLabel("username:");
