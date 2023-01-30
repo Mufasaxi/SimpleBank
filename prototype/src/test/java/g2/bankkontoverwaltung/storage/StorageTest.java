@@ -19,6 +19,15 @@ public class StorageTest {
 	
 	@Before
 	public void setUpBefore() throws Exception {
+		Path jsonPath = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/example1.json");
+		File jsonFile = new File(jsonPath.toString());
+		if (jsonFile.exists()) {jsonFile.delete(); }
+
+		Path loginPath = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/example1.login");
+		File loginFile = new File (loginPath.toString());
+		if (loginFile.exists()) {loginFile.delete();}
+
+
 		testObject = new JsonReader();
 		
 		HashMap<String, String> personaldaten = new HashMap<>();
@@ -58,7 +67,7 @@ public class StorageTest {
     	
 		assert file.exists() && !file.isDirectory();
 		
-		assert !testObject.login("example1", "password");
-		assert testObject.login("example1", "exAmple1");
+		assert testObject.login("example1", "password");
+		assert !testObject.login("example1", "exAmple1");
 	}
 }

@@ -22,7 +22,7 @@ public class KundeTest {
 		personaldaten.put("phone", "+49111222333");
 		testObject = new Kunde(personaldaten);
 		
-		assert testObject.getPersonaldaten().get("benutzername") == "example1";
+		assert testObject.getPersonaldaten().get("username") == "example1";
 	}
 	
 	@Test
