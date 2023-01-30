@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"g2.bankkontoverwaltung"},{"l":"g2.bankkontoverwaltung.controller"},{"l":"g2.bankkontoverwaltung.model"},{"l":"g2.bankkontoverwaltung.storage"},{"l":"g2.bankkontoverwaltung.view"}];updateSearchResults();

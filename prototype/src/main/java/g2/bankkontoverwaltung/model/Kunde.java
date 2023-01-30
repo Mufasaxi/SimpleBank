@@ -10,6 +10,10 @@ import org.apache.commons.lang.IllegalClassException;
 
 import g2.bankkontoverwaltung.ObserverIF;
 
+/**
+ * Represents a Bank Customer
+ * @author Muhammad Daryl Rashad
+ */
 public class Kunde implements KundeIF, ObservableIF {
 //    personalausweis HashMap Beispiel:
 //    key = "Name", value="Daryl"
@@ -21,29 +25,52 @@ public class Kunde implements KundeIF, ObservableIF {
     public Kunde() {
     	super();
     }
-    
+
+    /**
+     * Basic constructor for a Kunde
+     * @param personaldaten HashMap containing customer information
+     */
     public Kunde(HashMap<String, String> personaldaten) {
         this.personaldaten = personaldaten;
         this.konten = new Vector<>();
         this.observers = new Vector<>();
     }
 
-	@Override
+    /**
+     * Get all personal data
+     * @return HashMap containing personal data
+     */
+    @Override
     public HashMap<String, String> getPersonaldaten() {
         return this.personaldaten;
     }
 
+    /**
+     * Set/add a specific personal data
+     * @param key Type of personal data
+     * @param value Value of personal data
+     */
     @Override
     @JsonIgnore
     public void setPersonalData(String key, String value) {
         this.personaldaten.put(key, value);
     }
 
+    /**
+     * Remove a specific personal data
+     * @param key Type of personal data to be removed
+     */
     @Override
     public void removePersonalData(String key) {
         this.personaldaten.remove(key);
     }
 
+    /**
+     * Create a new Girokonto for the user
+     * @param anfangssaldo starting saldo
+     * @return new Girokonto object
+     * @throws IOException
+     */
     @Override
     public Girokonto createGirokonto(double anfangssaldo) throws IOException {
         Girokonto newKonto = new Girokonto(this, anfangssaldo);
@@ -52,6 +79,14 @@ public class Kunde implements KundeIF, ObservableIF {
         return newKonto;
     }
 
+    /**
+     * Create a new Depotkonto for the user
+     * @param referenzkontoId Id of the Referenzkonto
+     * @return new Depotkonto object
+     * @throws IllegalClassException when referenzkontoId belongs to Konto that is not a Girokonto
+     * @throws ArrayIndexOutOfBoundsException when referenzkontoId does not exist
+     * @throws IOException when error with reading data
+     */
     @Override
     public Depotkonto createDepotkonto(int referenzkontoId) throws IllegalClassException, ArrayIndexOutOfBoundsException, IOException {
         Depotkonto newKonto = new Depotkonto(this);
@@ -61,17 +96,31 @@ public class Kunde implements KundeIF, ObservableIF {
         return newKonto;
     }
 
+    /**
+     * Get all Konto belonging to user
+     * @return Vector containing all Konto belonging to user
+     */
     @Override
     public Vector<Konto> getKonten() {
         return this.konten;
     }
 
+    /**
+     * Get a specific Konto belonging to the user
+     * @param id id of requested Konto
+     * @return the requested Konto
+     * @throws ArrayIndexOutOfBoundsException when the requested Konto is not found
+     */
     @Override
     @JsonIgnore
     public Konto getKonto(int id) throws ArrayIndexOutOfBoundsException {
         return this.konten.get(id);
     }
 
+    /**
+     * Remove a Konto
+     * @param id id of Konto to be removed
+     */
     @Override
     public void removeKonto(int id) {
         this.konten.remove(id);

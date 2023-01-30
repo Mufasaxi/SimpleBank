@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class CreateGiroKontoTest {
+public class CreateKontoTest {
     private static Kunde example;
     HashMap<String, String> personaldaten;
 
@@ -23,14 +23,13 @@ public class CreateGiroKontoTest {
     }
 
     @Test
-    public void testCreateGirokonto() throws IOException {
+    public void testCreateKonto() throws IOException {
 
-        Girokonto testKonto = example.createGirokonto(100);
-        assert example.getKonto(0).equals(testKonto);
-    }
-    @Test
-    public void testCreateDepotkonto() throws IOException {
-        Depotkonto testKonto = example.createDepotkonto(100);
-        assert example.getKonto(0).equals(testKonto);
+        Girokonto testGiroKonto = example.createGirokonto(100);
+        assert example.getKonto(0).equals(testGiroKonto);
+        System.out.println(example.getKonten().toString());
+
+        Depotkonto testDepotKonto = example.createDepotkonto(0);
+        assert example.getKonto(1).equals(testDepotKonto);
     }
 }
