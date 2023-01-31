@@ -114,7 +114,7 @@
                                 <archive>
                                     <manifest>
                                         <mainClass>
-                                            g2.bankkontoverwaltung.BankkontoverwaltungApp
+                                            g2.bankkontoverwaltung.Main
                                         </mainClass>
                                     </manifest>
                                 </archive>
