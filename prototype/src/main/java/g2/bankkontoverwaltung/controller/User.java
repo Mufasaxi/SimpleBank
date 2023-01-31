@@ -52,7 +52,7 @@ public class User implements ActionListener, ObserverIF {
             loginPage.userField.setText("");
             loginPage.passField.setText("");
             loginPage.loginMessageLabel.setText("");
-            loginPage.frame.dispose();
+            //loginPage.frame.dispose();
             //REMOVE AFTER TESTING
 //            this.welcomePage = new WelcomePage(this, null);//shortcut for testing
         }
