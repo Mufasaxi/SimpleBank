@@ -14,11 +14,11 @@ public class CreateKontoTest {
     @Before
     public void beforeSetUp() {
         personaldaten = new HashMap<>();
-        personaldaten.put("benutzername", "example1");
+        personaldaten.put("username", "example1");
         personaldaten.put("name", "Max Mustermann");
         personaldaten.put("aufenthaltstitel", "DE12345");
-        personaldaten.put("adresse", "Leibnizstraße 20");
-        personaldaten.put("telefonnummer", "+49111222333");
+        personaldaten.put("address", "Leibnizstraße 20");
+        personaldaten.put("phone", "+49111222333");
         example = new Kunde(personaldaten);
     }
 

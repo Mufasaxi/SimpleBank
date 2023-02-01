@@ -61,13 +61,13 @@ public class StorageTest {
 	
 	@Test
 	public void testLogin() throws IOException {
-		testObject.saveLogin("example1", "password");
+		testObject.saveLogin("example1", "password12345");
     	Path path = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/example1.login");
     	File file = new File(path.toString());
     	
 		assert file.exists() && !file.isDirectory();
 		
-		assert testObject.login("example1", "password");
+		assert testObject.login("example1", "password12345");
 		assert !testObject.login("example1", "exAmple1");
 	}
 }

@@ -1,27 +1,35 @@
 # Bankkontoverwaltung App
 Simple bank account management app.
 
-## Requirement
-- Install the Java Development Kit v14+ from this [link](https://jdk.java.net/)
-- Install the Maven v3 package from this [link](https://maven.apache.org/download.cgi)
-
-## Compile
-
-Run Maven Package goal in Project directory prototype
-```
-mvn package
-```
-
-Alternatively: a pre-compiled .jar is available in the folder prototype/deploy
-
 ## Usage
 
 ### Prerequisites
 
-- JRE 14+
+- JRE 8+ [here](https://www.java.com/en/download/manual.jsp)
 
 ### Instructions
 
-- Run Bankkontoverwaltung.jar
+- Run BankkontoverwaltungApp.jar in the folder deploy by double-clicking
 - Create account or login
-- 
+- Use the available funtions
+
+### Notes
+
+- Only the following functions have been implemented:
+  - Create Giro
+  - Create Depot
+  - Accounts overview
+- Example user credentials:
+  - user: example1
+  - password: password12345
+
+## Credits
+
+Made by SWT Group 2:
+
+- Mona Amro
+- Jingrun Zhang
+- Mingwei Gao
+- Muhammad Daryl Rashad
+- Mustafa Abdalla
+- Silvia Wen
