@@ -1,1 +1,0 @@
-{"personaldaten":{"address":"Leibnizstraße 20","phone":"+49111222333","name":"Max Mustermann","username":"example1"},"konten":[{"@type":"Girokonto","benutzername":"example1","saldo":100.0,"id":0,"iban":"DE99012345670000000004"},{"@type":"Depotkonto","benutzername":"example1","saldo":0.0,"id":1,"referenzkonten":[0],"aktien":[]}]}

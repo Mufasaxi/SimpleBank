@@ -9,14 +9,10 @@ Simple bank account management app.
 
 ### Instructions
 
-- Change directory into deploy
+- Run BankkontoverwaltungApp.jar in the deploy folder by double-clicking it or using the following command:
 
-``` 
+```sh
 cd deploy
-```
-- Run BankkontoverwaltungApp.jar
-
-```
 java -jar BankkontoverwaltungApp.jar
 ```
 - Create account or login
@@ -31,6 +27,7 @@ java -jar BankkontoverwaltungApp.jar
 - Example user credentials:
   - user: example1
   - password: password12345
+- Javadoc located in doc folder
 
 ## Credits
 
