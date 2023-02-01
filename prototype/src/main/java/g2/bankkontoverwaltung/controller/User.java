@@ -5,13 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import g2.bankkontoverwaltung.ObserverIF;
-import g2.bankkontoverwaltung.model.Girokonto;
 import g2.bankkontoverwaltung.model.Kunde;
 import g2.bankkontoverwaltung.storage.JsonReader;
 import g2.bankkontoverwaltung.view.*;
@@ -30,7 +30,7 @@ public class User implements ActionListener, ObserverIF {
     private DepotOverviewPage depotOverviewPage;
     private OverviewPage overviewPage;
 
-    public User() {
+    public User() throws URISyntaxException, IOException {
         this.jr = new JsonReader();
         this.loginPage = new LoginPage(this);
     }
@@ -61,7 +61,12 @@ public class User implements ActionListener, ObserverIF {
         else if (e.getSource() == loginPage.loginButton) {
             String user = loginPage.userField.getText();
             String pass = String.valueOf(loginPage.passField.getPassword());
-            JsonReader jr = new JsonReader();
+            JsonReader jr;
+            try {
+                jr = new JsonReader();
+            } catch (URISyntaxException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
 
             //checks if entered login data matches the data stored in the hash map
             try {
@@ -86,7 +91,12 @@ public class User implements ActionListener, ObserverIF {
         } else if (registrationPage != null && e.getSource() == registrationPage.createButton) {
             System.out.println("creating");
 
-            JsonReader jr = new JsonReader();
+            JsonReader jr;
+            try {
+                jr = new JsonReader();
+            } catch (URISyntaxException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
             try {
             	
         		String password = String.valueOf(registrationPage.passField.getPassword());
@@ -152,7 +162,7 @@ public class User implements ActionListener, ObserverIF {
             } catch (NumberFormatException nfe) {
                 createGiroPage.startSaldoField.setText("");
                 createGiroPage.saldoWarningLabel.setVisible(true);
-            } catch (IOException ex) {
+            } catch (IOException | URISyntaxException ex) {
                 throw new RuntimeException(ex);
             }
             try {
@@ -182,7 +192,7 @@ public class User implements ActionListener, ObserverIF {
                 createDepotPage.idWarningLabel.setVisible(true);
             }catch (IllegalClassException ex) {
                 System.out.println("ID is not Girokonto");
-            } catch (IOException ex) {
+            } catch (IOException | URISyntaxException ex) {
                 throw new RuntimeException(ex);
             }
         } else if (depotOverviewPage != null && e.getSource() == depotOverviewPage.functionsButton) {

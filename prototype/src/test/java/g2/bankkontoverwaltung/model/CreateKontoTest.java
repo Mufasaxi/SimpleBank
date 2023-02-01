@@ -1,10 +1,15 @@
 package g2.bankkontoverwaltung.model;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 
 public class CreateKontoTest {
@@ -23,7 +28,7 @@ public class CreateKontoTest {
     }
 
     @Test
-    public void testCreateKonto() throws IOException {
+    public void testCreateKonto() throws IOException, URISyntaxException {
 
         Girokonto testGiroKonto = example.createGirokonto(100);
         assert example.getKonto(0).equals(testGiroKonto);
@@ -31,5 +36,13 @@ public class CreateKontoTest {
 
         Depotkonto testDepotKonto = example.createDepotkonto(0);
         assert example.getKonto(1).equals(testDepotKonto);
+    }
+
+    @After
+    public void cleanUp() {
+        File[] allContents = new File("./data").listFiles();
+        for (File file : allContents) {
+            file.delete();
+        }
     }
 }

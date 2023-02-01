@@ -1,6 +1,7 @@
 package g2.bankkontoverwaltung.model;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -72,7 +73,7 @@ public class Kunde implements KundeIF, ObservableIF {
      * @throws IOException
      */
     @Override
-    public Girokonto createGirokonto(double anfangssaldo) throws IOException {
+    public Girokonto createGirokonto(double anfangssaldo) throws IOException, URISyntaxException {
         Girokonto newKonto = new Girokonto(this, anfangssaldo);
         this.konten.add(newKonto);
         (new JsonReader()).saveKunde(this);
@@ -88,7 +89,7 @@ public class Kunde implements KundeIF, ObservableIF {
      * @throws IOException when error with reading data
      */
     @Override
-    public Depotkonto createDepotkonto(int referenzkontoId) throws IllegalClassException, ArrayIndexOutOfBoundsException, IOException {
+    public Depotkonto createDepotkonto(int referenzkontoId) throws IllegalClassException, ArrayIndexOutOfBoundsException, IOException, URISyntaxException {
         Depotkonto newKonto = new Depotkonto(this);
         newKonto.addReferenzkonto(referenzkontoId);
         this.konten.add(newKonto);

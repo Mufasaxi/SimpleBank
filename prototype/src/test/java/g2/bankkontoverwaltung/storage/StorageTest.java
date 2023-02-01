@@ -2,6 +2,7 @@ package g2.bankkontoverwaltung.storage;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -16,27 +17,25 @@ import g2.bankkontoverwaltung.model.Kunde;
 public class StorageTest {
 	private static JsonReader testObject;
 	private Kunde example;
-	
+	Path pathToData;
+
 	@Before
 	public void setUpBefore() throws Exception {
-		Path jsonPath = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/example1.json");
-		File jsonFile = new File(jsonPath.toString());
-		if (jsonFile.exists()) {jsonFile.delete(); }
-
-		Path loginPath = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/example1.login");
-		File loginFile = new File (loginPath.toString());
-		if (loginFile.exists()) {loginFile.delete();}
-
+		pathToData = Path.of("./data");
+		File[] allContents = new File(String.valueOf(pathToData)).listFiles();
+		for (File file : allContents) {
+			file.delete();
+		}
 
 		testObject = new JsonReader();
-		
+
 		HashMap<String, String> personaldaten = new HashMap<>();
 		personaldaten.put("username", "example1");
 		personaldaten.put("name", "Max Mustermann");
 		personaldaten.put("address", "Leibnizstraße 20");
 		personaldaten.put("phone", "+49111222333");
 		example = new Kunde(personaldaten);
-		
+
 		example.createGirokonto(100);
 		example.createDepotkonto(0);
 	}
@@ -44,29 +43,29 @@ public class StorageTest {
 	@Test
 	public void testSaveKunde() throws IOException {
 		testObject.saveKunde(example);
-		Path path = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/example1.json");
+		Path path = Paths.get(pathToData + "\\example1.json");
 		File file = new File(path.toString());
-		
+
 		assert file.exists() && !file.isDirectory();
 	}
-	
+
 	@Test
 	public void testLoadKunde() throws IOException {
 		Kunde loaded = testObject.getKunde("example1");
-		
+
 		assert loaded.getPersonaldaten().equals(example.getPersonaldaten());
 		assert loaded.getKonto(0) instanceof Girokonto;
 		assert loaded.getKonto(1) instanceof Depotkonto;
 	}
-	
+
 	@Test
 	public void testLogin() throws IOException {
 		testObject.saveLogin("example1", "password12345");
-    	Path path = Paths.get("src/main/java/g2/bankkontoverwaltung/storage/data/example1.login");
+    	Path path = Paths.get(pathToData + "\\example1.login");
     	File file = new File(path.toString());
-    	
+
 		assert file.exists() && !file.isDirectory();
-		
+
 		assert testObject.login("example1", "password12345");
 		assert !testObject.login("example1", "exAmple1");
 	}

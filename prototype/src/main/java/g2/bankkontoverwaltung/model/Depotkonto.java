@@ -1,6 +1,7 @@
 package g2.bankkontoverwaltung.model;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Vector;
 
 import g2.bankkontoverwaltung.storage.JsonReader;
@@ -25,7 +26,7 @@ public class Depotkonto extends Konto{
         return this.referenzkonten;
     }
 
-    public void addReferenzkonto(int referenzkontoId) throws IllegalClassException, ArrayIndexOutOfBoundsException, IOException {
+    public void addReferenzkonto(int referenzkontoId) throws IllegalClassException, ArrayIndexOutOfBoundsException, IOException, URISyntaxException {
         JsonReader jr = new JsonReader();
         Konto referenzkonto = jr.getKunde(this.getBenutzername()).getKonto(referenzkontoId);
         if (referenzkonto instanceof Girokonto) {
