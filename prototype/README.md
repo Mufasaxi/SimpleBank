@@ -9,7 +9,16 @@ Simple bank account management app.
 
 ### Instructions
 
-- Run BankkontoverwaltungApp.jar in the folder deploy by double-clicking
+- Change directory into deploy
+
+``` 
+cd deploy
+```
+- Run BankkontoverwaltungApp.jar
+
+```
+java -jar BankkontoverwaltungApp.jar
+```
 - Create account or login
 - Use the available funtions
 
