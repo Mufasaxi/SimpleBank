@@ -1,8 +1,13 @@
-# Softwaretechnik I Praktische Arbeit
+# Softwaretechnik I Praktische Arbeit Gruppe 2
 
-Hier soll das Projekt bearbeitet werden.
+- Mona Amro
+- Jingrun Zhang
+- Mingwei Gao
+- Muhammad Daryl Rashad
+- Mustafa Abdalla
+- Silvia Wen
 
-Alle Aufgabenbeschreibungen finden sich auf der [Moodle Seite](https://moodle.tu-clausthal.de/course/view.php?id=1512) der Praktischen Arbeit. 
+## BankkontoverwaltungApp
 
-Dort erfolgt auch die Abgabe!!!!
+You can find the prototype and usage instructions in the folder prototyp.
 
