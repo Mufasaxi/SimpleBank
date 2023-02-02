@@ -5,7 +5,7 @@ Simple bank account management app.
 
 ### Prerequisites
 
-- JRE 8+ [here](https://www.java.com/en/download/manual.jsp)
+- JDK 11 or newer [here](https://jdk.java.net/)
 
 ### Instructions
 
