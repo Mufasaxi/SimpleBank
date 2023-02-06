@@ -122,8 +122,7 @@ public class User implements ActionListener, ObserverIF {
 	                personaldaten.put("address", registrationPage.addressField.getText());
 	                Kunde newKunde = new Kunde(personaldaten);
 	                this.identity = newKunde;
-	                
-	                jr.saveKunde(newKunde);
+
 	                registrationPage.frame.dispose();
 	                this.welcomePage = new WelcomePage(this, registrationPage.userField.getText());
     		    }
@@ -131,6 +130,8 @@ public class User implements ActionListener, ObserverIF {
                 System.out.println("username already exists choose another");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
+            } catch (URISyntaxException e1) {
+                throw new RuntimeException(e1);
             }
         } else if (e.getSource() == welcomePage.newDepotButton) {
             System.out.println("new clicked");

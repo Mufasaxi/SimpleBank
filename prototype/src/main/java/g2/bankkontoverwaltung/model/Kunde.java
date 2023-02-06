@@ -22,6 +22,7 @@ public class Kunde implements KundeIF, ObservableIF {
     private HashMap<String, String> personaldaten;
     private Vector<Konto> konten;
     private Vector<ObserverIF> observers;
+    private JsonReader jr;
 
     public Kunde() {
     	super();
@@ -31,10 +32,13 @@ public class Kunde implements KundeIF, ObservableIF {
      * Basic constructor for a Kunde
      * @param personaldaten HashMap containing customer information
      */
-    public Kunde(HashMap<String, String> personaldaten) {
+    public Kunde(HashMap<String, String> personaldaten) throws URISyntaxException, IOException {
         this.personaldaten = personaldaten;
         this.konten = new Vector<>();
         this.observers = new Vector<>();
+
+        this.jr = new JsonReader();
+        jr.saveKunde(this);
     }
 
     /**
@@ -74,9 +78,12 @@ public class Kunde implements KundeIF, ObservableIF {
      */
     @Override
     public Girokonto createGirokonto(double anfangssaldo) throws IOException, URISyntaxException {
+        if (anfangssaldo < 0) {
+            throw new IllegalArgumentException();
+        }
         Girokonto newKonto = new Girokonto(this, anfangssaldo);
         this.konten.add(newKonto);
-        (new JsonReader()).saveKunde(this);
+        this.jr.saveKunde(this);
         return newKonto;
     }
 
@@ -90,10 +97,13 @@ public class Kunde implements KundeIF, ObservableIF {
      */
     @Override
     public Depotkonto createDepotkonto(int referenzkontoId) throws IllegalClassException, ArrayIndexOutOfBoundsException, IOException, URISyntaxException {
+        if (referenzkontoId < 0) {
+            throw new IllegalArgumentException();
+        }
         Depotkonto newKonto = new Depotkonto(this);
         newKonto.addReferenzkonto(referenzkontoId);
         this.konten.add(newKonto);
-        (new JsonReader()).saveKunde(this);
+        this.jr.saveKunde(this);
         return newKonto;
     }
 
