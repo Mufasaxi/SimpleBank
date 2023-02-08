@@ -13,7 +13,7 @@ public class CreateGiroPage implements ActionListener {
 	JLabel fillLabel = new JLabel("Please fill out the following fields");
 	public JTextField startSaldoField = new JTextField();
 	JLabel saldoLabel = new JLabel("Start Balance:");
-	public JLabel saldoWarningLabel = new JLabel("Please only enter number!");
+	public JLabel saldoWarningLabel = new JLabel("Please only enter a positive number!");
 	public JButton createButton = new JButton("Create account");
 
 	User user;
@@ -33,7 +33,7 @@ public class CreateGiroPage implements ActionListener {
 		
 		saldoLabel.setBounds(25,100,100,25);
 		startSaldoField.setBounds(125,100,200,25);
-		saldoWarningLabel.setBounds(150,150,200,25);
+		saldoWarningLabel.setBounds(150,150,225,25);
 		saldoWarningLabel.setVisible(false);
 		
 		createButton.setBounds(175,125,150,25);

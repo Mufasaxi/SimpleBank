@@ -127,6 +127,7 @@ public class User implements ActionListener, ObserverIF {
 	                this.welcomePage = new WelcomePage(this, registrationPage.userField.getText());
     		    }
             } catch (FileAlreadyExistsException ex) {
+            	registrationPage.userWarningLabel.setVisible(true);
                 System.out.println("username already exists choose another");
             } catch (IOException ex) {
                 throw new RuntimeException(ex);

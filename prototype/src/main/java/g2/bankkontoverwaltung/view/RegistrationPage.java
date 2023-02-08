@@ -29,6 +29,7 @@ public class RegistrationPage implements ActionListener{
 	JLabel passLabel = new JLabel("password:");
 	public JButton createButton = new JButton("Register");
 	public JLabel passWarningLabel = new JLabel("The password must be atleast 9 characters long!");
+	public JLabel userWarningLabel = new JLabel("This username already exists! choose another.");
 
 	private User user;
 	String password;
@@ -45,8 +46,10 @@ public class RegistrationPage implements ActionListener{
 		addressLabel.setBounds(50,150,75,25);
 		userLabel.setBounds(50,200,75,25);
 		passLabel.setBounds(50,250,75,25);
-		passWarningLabel.setBounds(15,325,350,25);
+		passWarningLabel.setBounds(15,275,350,25);
+		userWarningLabel.setBounds(15,325,350,25);
 		passWarningLabel.setVisible(false);
+		userWarningLabel.setVisible(false);
 		
 		nameField.setBounds(125,100,200,25);
 		addressField.setBounds(125,150,200,25);
@@ -57,7 +60,7 @@ public class RegistrationPage implements ActionListener{
 		createButton.setFocusable(false);
 		createButton.addActionListener(this);
 		
-
+		frame.add(userWarningLabel);
 		frame.add(passWarningLabel);
 		frame.add(createButton);
 		frame.add(addressLabel);
