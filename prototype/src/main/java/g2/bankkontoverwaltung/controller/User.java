@@ -166,6 +166,9 @@ public class User implements ActionListener, ObserverIF {
                 createGiroPage.saldoWarningLabel.setVisible(true);
             } catch (IOException | URISyntaxException ex) {
                 throw new RuntimeException(ex);
+            } catch (IllegalArgumentException ile) {
+            	createGiroPage.startSaldoField.setText("");
+                createGiroPage.saldoWarningLabel.setVisible(true);
             }
             try {
                 jr.saveKunde(this.identity);
