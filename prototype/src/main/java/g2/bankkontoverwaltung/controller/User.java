@@ -157,6 +157,10 @@ public class User implements ActionListener, ObserverIF {
             try {
                 createGiroPage.saldoWarningLabel.setVisible(false);
                 this.createGiroPage.saldo = Double.parseDouble(createGiroPage.startSaldoField.getText());
+                //TRIAL
+                if (this.createGiroPage.saldo < 0) {
+                	throw new IllegalArgumentException();
+                }
                 createGiroPage.frame.dispose();
                 this.giroOverviewPage = new GiroOverviewPage(this, this.identity.createGirokonto(this.createGiroPage.saldo));
                 this.jr.saveKunde(this.identity);
@@ -188,6 +192,10 @@ public class User implements ActionListener, ObserverIF {
             try {
                 createDepotPage.idWarningLabel.setVisible(false);
                 createDepotPage.id = Integer.parseInt(createDepotPage.referenceIDField.getText());
+              //TRIAL
+                if (this.createDepotPage.id < 0) {
+                	throw new IllegalArgumentException();
+                }
                 createDepotPage.frame.dispose();
                 this.depotOverviewPage = new DepotOverviewPage(this, this.identity.createDepotkonto(createDepotPage.id));
                 this.jr.saveKunde(this.identity);
@@ -195,10 +203,14 @@ public class User implements ActionListener, ObserverIF {
             } catch (NumberFormatException nfe) {
                 createDepotPage.referenceIDField.setText("");
                 createDepotPage.idWarningLabel.setVisible(true);
-            }catch (IllegalClassException ex) {
+            }catch (ArrayIndexOutOfBoundsException | IllegalClassException ex) {
+            	createDepotPage.referenceIDField.setText("");
                 System.out.println("ID is not Girokonto");
             } catch (IOException | URISyntaxException ex) {
                 throw new RuntimeException(ex);
+            } catch (IllegalArgumentException ile) {
+            	createDepotPage.referenceIDField.setText("");
+                createDepotPage.idWarningLabel.setVisible(true);
             }
         } else if (depotOverviewPage != null && e.getSource() == depotOverviewPage.functionsButton) {
             depotOverviewPage.frame.dispose();
