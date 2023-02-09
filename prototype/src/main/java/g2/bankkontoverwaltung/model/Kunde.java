@@ -78,9 +78,9 @@ public class Kunde implements KundeIF, ObservableIF {
      */
     @Override
     public Girokonto createGirokonto(double anfangssaldo) throws IOException, URISyntaxException {
-        if (anfangssaldo < 0) {
-            throw new IllegalArgumentException();
-        }
+//        if (anfangssaldo < 0) {
+//            throw new IllegalArgumentException();
+//        }
         Girokonto newKonto = new Girokonto(this, anfangssaldo);
         this.konten.add(newKonto);
         this.jr.saveKunde(this);

@@ -12,7 +12,7 @@ public class CreateDepotPage implements ActionListener {
 	JLabel fillLabel = new JLabel("Please fill out the following fields");
 	public JTextField referenceIDField = new JTextField();
 	JLabel referenceIDLabel = new JLabel("Reference Account ID:");
-	public JLabel idWarningLabel = new JLabel("Please only enter numbers!");
+	public JLabel idWarningLabel = new JLabel("Please only enter positive numbers!");
 	public JButton createButton = new JButton("Create account");
 
 	User user;
@@ -30,7 +30,7 @@ public class CreateDepotPage implements ActionListener {
 		
 		referenceIDLabel.setBounds(0,100,150,25);
 		referenceIDField.setBounds(150,100,200,25);
-		idWarningLabel.setBounds(150,150,200,25);
+		idWarningLabel.setBounds(150,150,225,25);
 		idWarningLabel.setVisible(false);
 		
 		createButton.setBounds(175,125,150,25);
