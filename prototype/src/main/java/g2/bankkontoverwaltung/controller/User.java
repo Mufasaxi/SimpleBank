@@ -129,10 +129,8 @@ public class User implements ActionListener, ObserverIF {
             } catch (FileAlreadyExistsException ex) {
             	registrationPage.userWarningLabel.setVisible(true);
                 System.out.println("username already exists choose another");
-            } catch (IOException ex) {
+            } catch (IOException | URISyntaxException ex) {
                 throw new RuntimeException(ex);
-            } catch (URISyntaxException e1) {
-                throw new RuntimeException(e1);
             }
         } else if (e.getSource() == welcomePage.newDepotButton) {
             System.out.println("new clicked");
@@ -157,22 +155,16 @@ public class User implements ActionListener, ObserverIF {
             try {
                 createGiroPage.saldoWarningLabel.setVisible(false);
                 this.createGiroPage.saldo = Double.parseDouble(createGiroPage.startSaldoField.getText());
-                //TRIAL
-                if (this.createGiroPage.saldo < 0) {
-                	throw new IllegalArgumentException();
-                }
-                createGiroPage.frame.dispose();
+                
                 this.giroOverviewPage = new GiroOverviewPage(this, this.identity.createGirokonto(this.createGiroPage.saldo));
                 this.jr.saveKunde(this.identity);
+                createGiroPage.frame.dispose();
                 // if data entered is not float
-            } catch (NumberFormatException nfe) {
+            } catch (IllegalArgumentException nfe) {
                 createGiroPage.startSaldoField.setText("");
                 createGiroPage.saldoWarningLabel.setVisible(true);
             } catch (IOException | URISyntaxException ex) {
                 throw new RuntimeException(ex);
-            } catch (IllegalArgumentException ile) {
-            	createGiroPage.startSaldoField.setText("");
-                createGiroPage.saldoWarningLabel.setVisible(true);
             }
             try {
                 jr.saveKunde(this.identity);
@@ -188,30 +180,23 @@ public class User implements ActionListener, ObserverIF {
             System.out.println(createDepotPage.referenceIDField.getText());
             System.out.println(createDepotPage.username);
 
-            // if data entered is float
-            try {
-                createDepotPage.idWarningLabel.setVisible(false);
-                createDepotPage.id = Integer.parseInt(createDepotPage.referenceIDField.getText());
-              //TRIAL
-                if (this.createDepotPage.id < 0) {
-                	throw new IllegalArgumentException();
+                try {
+                    createDepotPage.idWarningLabel.setVisible(false);
+                    createDepotPage.id = Integer.parseInt(createDepotPage.referenceIDField.getText());
+
+                    this.depotOverviewPage = new DepotOverviewPage(this, this.identity.createDepotkonto(createDepotPage.id));
+                    this.jr.saveKunde(this.identity);
+                    createDepotPage.frame.dispose();
+                } catch (ArrayIndexOutOfBoundsException | IllegalClassException ex) {
+                    createDepotPage.referenceIDField.setText("");
+                    System.out.println("ID is not Girokonto");
+                } catch (IllegalArgumentException nfe) {
+                    createDepotPage.referenceIDField.setText("");
+                    createDepotPage.idWarningLabel.setVisible(true);
+                } catch (IOException | URISyntaxException ex) {
+                    throw new RuntimeException(ex);
                 }
-                createDepotPage.frame.dispose();
-                this.depotOverviewPage = new DepotOverviewPage(this, this.identity.createDepotkonto(createDepotPage.id));
-                this.jr.saveKunde(this.identity);
-                // if data entered is not float
-            } catch (NumberFormatException nfe) {
-                createDepotPage.referenceIDField.setText("");
-                createDepotPage.idWarningLabel.setVisible(true);
-            }catch (ArrayIndexOutOfBoundsException | IllegalClassException ex) {
-            	createDepotPage.referenceIDField.setText("");
-                System.out.println("ID is not Girokonto");
-            } catch (IOException | URISyntaxException ex) {
-                throw new RuntimeException(ex);
-            } catch (IllegalArgumentException ile) {
-            	createDepotPage.referenceIDField.setText("");
-                createDepotPage.idWarningLabel.setVisible(true);
-            }
+
         } else if (depotOverviewPage != null && e.getSource() == depotOverviewPage.functionsButton) {
             depotOverviewPage.frame.dispose();
             this.welcomePage = new WelcomePage(this, depotOverviewPage.username);
